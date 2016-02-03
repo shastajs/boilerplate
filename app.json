@@ -1,0 +1,13 @@
+{
+  "name": "boilerplate",
+  "description": "shasta-boilerplate",
+  "scripts": {},
+  "env": {
+    "NODE_ENV": {
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-redis"
+  ]
+}
