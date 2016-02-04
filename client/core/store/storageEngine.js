@@ -24,7 +24,11 @@ const storageEngine =
 
 export default {
   engine: storageEngine,
-  load: storage.createLoader(storageEngine),
+  hook: (store) => {
+    const loader = storage.createLoader(storageEngine)
+    loader(store)
+    return store
+  },
   reducer: storage.reducer,
   middleware: storage.createMiddleware(storageEngine, actionBlacklist)
 }

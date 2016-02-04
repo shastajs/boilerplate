@@ -1,25 +1,27 @@
 import { createStore } from 'shasta'
-import { listenForReplays } from 'shasta-router'
+import { hook as routerHook } from 'shasta-router'
 import storage from './storageEngine'
 import rootReducer from '../reducers'
 import middleware from './middleware'
 import initialState from './initialState'
 
 const hotReload = (store) => {
-  if (!module.hot) return
+  if (!module.hot) return store
   module.hot.accept('../reducers', () =>
     store.replaceReducer(require('../reducers'))
   )
+  return store
 }
 
-export function configureStore (initialState) {
+export const configureStore = (initialState) => {
   const store = createStore({
     middleware: middleware,
     reducer: storage.reducer(rootReducer),
     initialState: initialState
   })
-  storage.load(store)
-  listenForReplays(store)
+
+  storage.hook(store)
+  routerHook(store)
   hotReload(store)
 
   return store
