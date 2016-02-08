@@ -1,6 +1,8 @@
-const initialState = 1
+import { Map } from 'immutable'
 
-export const increment = (state, { payload = 1 }) => state + payload
-export const decrement = (state, { payload = 1 }) => state - payload
+export const initialState = Map({ count: 1 })
 
-export default initialState
+export const increment = (state, { payload = 1 }) =>
+  state.update('count', v => v + payload)
+export const decrement = (state, { payload = 1 }) =>
+  state.update('count', v => v - payload)

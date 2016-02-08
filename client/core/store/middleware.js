@@ -1,9 +1,9 @@
 import logger from 'shasta-logger'
-import { middleware as routerMiddleware } from 'shasta-router'
-import storage from './storageEngine'
+import { middleware as router } from 'shasta-router'
+import { middleware as storage } from './storageEngine'
 
 export default [
-  routerMiddleware,
-  storage.middleware,
+  router,
+  storage,
   logger
 ]

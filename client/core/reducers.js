@@ -1,15 +1,18 @@
-import { combineReducers } from 'shasta'
+import { createReducer, combineReducers } from 'shasta'
 import { reducer as routeReducer } from 'shasta-router'
 import { reducers as apiReducers } from 'tahoe'
 import { reducer as formReducer } from 'shasta-forms'
-import { toReducers } from 'modules-to-redux'
+import { reducer as storageReducer } from './store/storageEngine'
 import localReducers from 'reducers/.lookup'
 
-export const reducers = {
-  ...apiReducers,
-  ...toReducers(localReducers),
+const appReducer = createReducer(localReducers)
+const otherReducers = {
   router: routeReducer,
-  forms: formReducer
+  forms: formReducer,
+  ...apiReducers
 }
 
-export default combineReducers(reducers)
+export default storageReducer(combineReducers(
+  appReducer,
+  otherReducers
+))

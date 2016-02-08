@@ -1,14 +1,14 @@
-import Immutable from 'immutable'
+import { Map } from 'immutable'
 import uuid from 'uuid'
 
-const initialState = Immutable.fromJS({
+export const initialState = Map({
   toggle: false,
-  items: {}
+  items: Map()
 })
 
 export const create = (state, {payload}) => {
   let id = uuid.v1()
-  let todo = Immutable.Map({
+  let todo = Map({
     id: id,
     text: payload,
     created: Date.now(),
@@ -37,5 +37,3 @@ export const clearCompleted = (state, {payload}) =>
   state.update('items', v =>
     v.filter(i => !i.get('completed'))
   )
-
-export default initialState

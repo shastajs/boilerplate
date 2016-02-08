@@ -12,14 +12,14 @@ import './index.sass'
 class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
-    counter: PropTypes.number,
+    count: PropTypes.number,
     me: PropTypes.map
   };
   static defaultState = {
     name: 'tj'
   };
   static storeProps = {
-    counter: 'counter',
+    count: 'counter.count',
     me: 'me'
   };
   render () {
@@ -54,7 +54,7 @@ class HomeView extends Component {
           <div className='ui column center aligned'>
             <i className='ui icon trophy huge' />
             <div className='ui header'>Stack Test Page</div>
-            <div className='ui header counter'>{this.props.counter}</div>
+            <div className='ui header counter'>{this.props.count}</div>
             <div className='ui large buttons'>
               <div className='ui button medium positive' onClick={() => this.actions.counter.increment()}>
                 Increment

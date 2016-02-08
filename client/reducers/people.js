@@ -3,7 +3,7 @@ import uuid from 'uuid'
 
 let ids = ['1', '2', '3', '4']
 
-const initialState = Immutable.fromJS({
+export const initialState = Immutable.fromJS({
   [ids[0]]: {
     id: ids[0],
     name: 'Andre Power',
@@ -82,5 +82,3 @@ export const save = (state, {payload}) => {
 export const remove = (state, {payload}) => {
   return state.delete(payload.get('id'))
 }
-
-export default initialState

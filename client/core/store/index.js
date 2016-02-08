@@ -1,7 +1,7 @@
 import { createStore } from 'shasta'
 import { hook as routerHook } from 'shasta-router'
-import storage from './storageEngine'
-import rootReducer from '../reducers'
+import { hook as storageHook } from './storageEngine'
+import reducer from '../reducers'
 import middleware from './middleware'
 import initialState from './initialState'
 
@@ -16,11 +16,11 @@ const hotReload = (store) => {
 export const configureStore = (initialState) => {
   const store = createStore({
     middleware: middleware,
-    reducer: storage.reducer(rootReducer),
+    reducer: reducer,
     initialState: initialState
   })
 
-  storage.hook(store)
+  storageHook(store)
   routerHook(store)
   hotReload(store)
 
