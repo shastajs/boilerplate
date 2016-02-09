@@ -2,12 +2,9 @@ import { Provider } from 'shasta'
 import { Router } from 'shasta-router'
 import React from 'react'
 import {Component, PropTypes} from 'shasta'
-import './index.sass'
 
-// css
-import 'jquery'
 import 'semantic-ui-css/semantic.css'
-import 'semantic-ui-css/semantic.js'
+import './index.sass'
 
 class RootView extends Component {
   static displayName = 'RootView';
