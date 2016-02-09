@@ -12,8 +12,8 @@ import './index.sass'
 class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
-    count: PropTypes.number,
-    me: PropTypes.map
+    count: PropTypes.number.isRequired,
+    me: PropTypes.map.isRequired
   };
   static defaultState = {
     name: 'tj'
@@ -35,14 +35,14 @@ class HomeView extends Component {
           </div>
           <div className='ui item right'>
             {
-              jif(!this.props.me, () =>
+              jif(!this.props.me.isEmpty(), () =>
                 <a className='ui button primary' href='/auth/facebook/start'>
                   Sign In
                 </a>
               )
             }
             {
-              jif(this.props.me, () =>
+              jif(this.props.me.isEmpty(), () =>
                 <a className='ui button' href='/auth/logout'>
                   Sign out
                 </a>

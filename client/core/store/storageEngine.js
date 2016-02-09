@@ -10,7 +10,8 @@ const whitelist = [
 ]
 
 const actionBlacklist = [
-  '@@router/INIT_PATH'
+  '@@router/INIT_PATH',
+  '@@router/UPDATE_LOCATION'
 ]
 
 const engine = createEngine('x')

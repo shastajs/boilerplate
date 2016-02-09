@@ -1,4 +1,4 @@
-import { Provider } from 'react-redux'
+import { Provider } from 'shasta'
 import { Router } from 'shasta-router'
 import React from 'react'
 import {Component, PropTypes} from 'shasta'
