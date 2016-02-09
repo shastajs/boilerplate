@@ -13,36 +13,30 @@ class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
     count: PropTypes.number.isRequired,
-    me: PropTypes.map.isRequired
+    me: PropTypes.map.isRequired,
+    name: PropTypes.string.isRequired
   };
-  static defaultState = {
+  static defaultProps = {
     name: 'tj'
   };
   static storeProps = {
     count: 'counter.count',
     me: 'me'
   };
+
   render () {
     return (
       <div className='ui grid relaxed home-view centered'>
         <DocumentMeta title='Home' />
         <div className='ui menu top attached'>
-          <div className='ui item left aligned category search'>
-            <div className='ui transparent icon input'>
-              <input className='prompt' type='text' placeholder='Search animals...'/>
-              <i className='ui icon search link'/>
-            </div>
-          </div>
           <div className='ui item right'>
             {
-              jif(!this.props.me.isEmpty(), () =>
+              jif(this.props.me.isEmpty()
+              , () =>
                 <a className='ui button primary' href='/auth/facebook/start'>
                   Sign In
                 </a>
-              )
-            }
-            {
-              jif(this.props.me.isEmpty(), () =>
+              , () =>
                 <a className='ui button' href='/auth/logout'>
                   Sign out
                 </a>
@@ -66,17 +60,15 @@ class HomeView extends Component {
             </div>
           </div>
         </div>
-        <div className='ui row'>
-          <div className='github-data ui container'>
-            <div className='ui grid relaxed centered'>
-              <div className='ui row'>
-                <User name={this.state.name}/>
-              </div>
-              <div className='ui row equal width'>
-                <OrgList name={this.state.name}/>
-                <RepoList name={this.state.name}/>
-                <UserList/>
-              </div>
+        <div className='github-data ui container'>
+          <div className='ui grid relaxed centered'>
+            <div className='ui row'>
+              <User name={this.props.name}/>
+            </div>
+            <div className='ui row equal width'>
+              <OrgList name={this.props.name}/>
+              <RepoList name={this.props.name}/>
+              <UserList/>
             </div>
           </div>
         </div>
