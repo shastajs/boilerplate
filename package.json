@@ -124,7 +124,7 @@
     "shasta": "github:shastajs/shasta",
     "shasta-data-view": "github:shastajs/shasta-data-view",
     "shasta-forms": "github:shastajs/shasta-forms",
-    "shasta-logger": "^1.0.0",
+    "shasta-logger": "^2.0.0",
     "shasta-router": "github:shastajs/shasta-router",
     "style-loader": "^0.13.0",
     "tahoe": "github:shastajs/tahoe",
