@@ -6,11 +6,11 @@ import TodosView from 'views/Todos'
 import NotFoundView from 'views/NotFound'
 
 export default (
-  <Route path='/'>
+  <Route path="/">
     <IndexRoute component={HomeView} />
-    <Route path='/about' component={AboutView} />
-    <Route path='/todos' component={TodosView} />
-    <Route path='/todos/:filter' component={TodosView} />
-    <Route path='*' component={NotFoundView}/>
+    <Route path="/about" component={AboutView} />
+    <Route path="/todos" component={TodosView} />
+    <Route path="/todos/:filter" component={TodosView} />
+    <Route path="*" component={NotFoundView}/>
   </Route>
 )

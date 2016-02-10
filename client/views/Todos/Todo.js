@@ -1,30 +1,31 @@
 import React from 'react'
-import {Component, PropTypes} from 'shasta'
+import { Component, PropTypes } from 'shasta'
 import classNames from 'classnames'
 import './index.sass'
 
 class Todo extends Component {
+  static displayName = 'Todo';
   static propTypes = {
-    todo: PropTypes.object.isRequired
+    todo: PropTypes.map.isRequired
   };
 
   static defaultState = {
     editing: false
   };
 
-  destroy () {
+  handleDestroyClick() {
     this.actions.todomvc.remove(this.props.todo)
   }
 
-  handleDoubleClick () {
-    this.setState({editing: true})
+  handleDoubleClick() {
+    this.setState({ editing: true })
   }
 
-  toggle () {
+  handleCheckClick() {
     this.actions.todomvc.toggle(this.props.todo)
   }
 
-  saveTodo (e) {
+  handleKeyDown(e) {
     const text = e.target.value.trim()
     if (e.which === 13) {
       this.actions.todomvc.save(this.props.todo.set('text', text))
@@ -32,39 +33,38 @@ class Todo extends Component {
     }
   }
 
-  editComplete () {
-    this.setState({editing: false})
+  handleBlur() {
+    this.setState({ editing: false })
   }
 
-  getContent () {
+  getContent() {
     if (this.state.editing) {
-      return <input
-        ref='todo'
-        className='edit'
+      return (<input
+        className="edit"
         defaultValue={this.props.todo.get('text')}
-        autoFocus='true'
-        onBlur={this.editComplete}
-        onKeyDown={this.saveTodo} />
+        autoFocus="true"
+        onBlur={this.handleBlur}
+        onKeyDown={this.handleKeyDown} />)
     }
-    return <div className='view'>
+    return (<div className="view">
       <input
-        className='toggle'
-        type='checkbox'
+        className="toggle"
+        type="checkbox"
         checked={this.props.todo.get('completed')}
-        onChange={this.toggle} />
+        onChange={this.handleCheckClick} />
       <label onDoubleClick={this.handleDoubleClick}>
         {this.props.todo.get('text')}
       </label>
-      <button onClick={this.destroy} className='destroy' />
-    </div>
+      <button onClick={this.handleDestroyClick} className="destroy" />
+    </div>)
   }
-  render () {
-    var className = classNames({
+  render() {
+    const className = classNames({
       completed: this.props.todo.get('completed')
     })
-    return <li className={className}>
+    return (<li className={className}>
       {this.getContent()}
-    </li>
+    </li>)
   }
 }
 

@@ -1,4 +1,4 @@
-import {compose} from 'compose-middleware'
+import { compose } from 'compose-middleware'
 import errorHandler from 'errorhandler'
 import pmx from 'pmx'
 

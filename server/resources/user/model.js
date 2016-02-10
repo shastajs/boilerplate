@@ -1,6 +1,6 @@
 import rethink from 'connections/rethink'
 import palisade from 'palisade'
-const {type, r} = rethink
+const { type, r } = rethink
 
 const User = rethink.createModel('User', {
   // core fields
@@ -29,30 +29,30 @@ const User = rethink.createModel('User', {
 
 palisade(User, {
   document: {
-    read: ['public'],
-    list: ['loggedIn'],
-    create: ['admin'],
-    update: ['admin', 'self'],
-    replace: ['admin'],
-    delete: ['admin']
+    read: [ 'public' ],
+    list: [ 'loggedIn' ],
+    create: [ 'admin' ],
+    update: [ 'admin', 'self' ],
+    replace: [ 'admin' ],
+    delete: [ 'admin' ]
   },
   read: {
-    id: ['public'],
-    role: ['admin', 'self'],
-    times: ['admin', 'self'],
-    facebook: ['admin'],
-    name: ['public'],
-    email: ['admin', 'self'],
-    location: ['loggedIn']
+    id: [ 'public' ],
+    role: [ 'admin', 'self' ],
+    times: [ 'admin', 'self' ],
+    facebook: [ 'admin' ],
+    name: [ 'public' ],
+    email: [ 'admin', 'self' ],
+    location: [ 'loggedIn' ]
   },
   write: {
-    id: ['admin'],
-    role: ['admin'],
-    times: ['admin'],
-    facebook: ['admin'],
-    name: ['admin', 'self'],
-    email: ['admin', 'self'],
-    location: ['admin', 'self']
+    id: [ 'admin' ],
+    role: [ 'admin' ],
+    times: [ 'admin' ],
+    facebook: [ 'admin' ],
+    name: [ 'admin', 'self' ],
+    email: [ 'admin', 'self' ],
+    location: [ 'admin', 'self' ]
   }
 })
 

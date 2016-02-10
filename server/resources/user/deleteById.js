@@ -2,7 +2,7 @@ import User from './model'
 
 export default (opt, cb) => {
   if (!User.authorized('delete', opt.user)) {
-    return cb({status: 403})
+    return cb({ status: 403 })
   }
 
   User.delete(opt.id)

@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from 'shasta-router'
-import {Component, PropTypes} from 'shasta'
+import { Link } from 'shasta-router'
+import { Component, PropTypes } from 'shasta'
 import jif from 'jif'
 import Todo from './Todo'
 import classNames from 'classnames'
@@ -16,11 +16,10 @@ const filters = {
 
 class TodosView extends Component {
   static displayName = 'TodosView';
-  static defaultState = {
-    addError: false
-  };
   static propTypes = {
-    params: PropTypes.object.isRequired,
+    params: PropTypes.shape({
+      filter: PropTypes.string
+    }).isRequired,
     todos: PropTypes.mapOf(PropTypes.map).isRequired,
     toggled: PropTypes.bool.isRequired
   };
@@ -29,32 +28,32 @@ class TodosView extends Component {
     toggled: 'todomvc.toggle'
   };
 
-  addTodo (e) {
-    var el = this.refs.todoInput
+  addTodo(e) {
+    const el = this._input
 
     if (e.keyCode === 13) {
       let val = el.value.trim()
       if (val === '') {
-        return this.setState({addError: true})
+        return this.setState({ addError: true })
       }
 
       this.actions.todomvc.create(val)
       el.value = ''
       el.focus()
-      this.setState({addError: false})
+      this.setState({ addError: false })
     }
   }
 
-  resetErrors () {
-    this.setState({addError: false})
+  resetErrors() {
+    this.setState({ addError: false })
   }
 
-  render () {
-    var filterFn = filters[this.props.params.filter || 'All']
+  render() {
+    const filterFn = filters[this.props.params.filter || 'All']
     return (
-      <div className='todoapp'>
-        <DocumentMeta title='TodoMVC'/>
-        <header className='header'>
+      <div className="todoapp">
+        <DocumentMeta title="TodoMVC"/>
+        <header className="header">
           <h1>todos</h1>
           <input
             className={
@@ -62,22 +61,22 @@ class TodosView extends Component {
                 'input-error': this.state.addError
               })
             }
-            ref='todoInput'
+            ref={(e) => this._input = e}
             onKeyDown={this.addTodo}
             onBlur={this.resetErrors}
-            type='text'
-            placeholder='What needs to be done?' />
+            type="text"
+            placeholder="What needs to be done?" />
         </header>
-        <section className='main'>
+        <section className="main">
           {
             jif(this.props.todos.size, () =>
               <input
-                className='toggle-all'
-                type='checkbox'
+                className="toggle-all"
+                type="checkbox"
                 onChange={this.actions.todomvc.toggleAll} />
             )
           }
-          <ul className='todo-list'>
+          <ul className="todo-list">
             {
               this.props.todos
                 .filter(filterFn)
@@ -90,11 +89,11 @@ class TodosView extends Component {
         </section>
         {
           jif(this.props.todos.size, () =>
-            <footer className='footer'>
-              <span className='todo-count'>
+            <footer className="footer">
+              <span className="todo-count">
                 {this.props.todos.filter(filters.Active).size} items left
               </span>
-              <ul className='filters'>
+              <ul className="filters">
               {
                 Object.keys(filters).map((k) =>
                   <li key={k}>
@@ -113,7 +112,7 @@ class TodosView extends Component {
                 jif(this.props.todos.filter(filters.Completed).size, () =>
                   <button
                     onClick={() => this.actions.todomvc.clearCompleted()}
-                    className='clear-completed'>
+                    className="clear-completed">
                     Clear completed
                   </button>
                 )

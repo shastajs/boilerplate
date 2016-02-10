@@ -1,6 +1,6 @@
 import React from 'react'
 import jif from 'jif'
-import {PropTypes} from 'shasta'
+import { PropTypes } from 'shasta'
 import DataComponent from 'shasta-data-view'
 import './index.sass'
 
@@ -13,25 +13,25 @@ class RepoList extends DataComponent {
     repos: 'requests.repos'
   };
 
-  fetch () {
-    var opt = {
+  fetch() {
+    const opt = {
       name: this.props.name
     }
-    this.actions.github.getRepositories({requestId: 'repos', params: opt})
+    this.actions.github.getRepositories({ requestId: 'repos', params: opt })
   }
 
-  renderData ({repos}) {
-    return <div className='ui list relaxed column'>
-      <div className='ui header'>{repos.size} Repos</div>
+  renderData({ repos }) {
+    return (<div className="ui list relaxed column">
+      <div className="ui header">{repos.size} Repos</div>
       {
         this.props.repos.map(repo =>
-          <div className='ui item' key={repo.get('id')}>
-            <i className='ui icon large github middle aligned'/>
-            <div className='content'>
-              <div className='ui header'>{repo.get('full_name')}</div>
+          <div className="ui item" key={repo.get('id')}>
+            <i className="ui icon large github middle aligned"/>
+            <div className="content">
+              <div className="ui header">{repo.get('full_name')}</div>
               {
                 jif(repo.has('description'), () =>
-                  <div className='description'>
+                  <div className="description">
                     {repo.get('description')}
                   </div>
                 )
@@ -40,20 +40,20 @@ class RepoList extends DataComponent {
           </div>
         )
       }
-    </div>
+    </div>)
   }
-  renderLoader () {
-    return <div className='ui header'>Loading...</div>
+  renderLoader() {
+    return <div className="ui header">Loading...</div>
   }
-  renderErrors (errors) {
-    return <div className='errors'>
+  renderErrors(errors) {
+    return (<div className="errors">
       Failed to Load:
       {
         errors.map((err, field) =>
           <div key={field}>{field}: {err.message}</div>
         ).toArray()
       }
-    </div>
+    </div>)
   }
 }
 

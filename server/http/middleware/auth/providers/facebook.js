@@ -1,9 +1,9 @@
-import {Router} from 'express'
+import { Router } from 'express'
 import passport from 'passport'
-import {Strategy} from 'passport-facebook'
+import { Strategy } from 'passport-facebook'
 import config from 'app-config-chain'
 import crypto from 'crypto'
-import {r} from 'connections/rethink'
+import { r } from 'connections/rethink'
 import User from 'resources/user/model'
 
 const md5 = (str) =>
@@ -24,9 +24,9 @@ const dataToUser = (data) => new User({
 
 const findOrCreateUser = (accessToken, refreshToken, profile, cb) => {
   User.insert(
-    dataToUser({...profile._json, accessToken: accessToken})
+    dataToUser({ ...profile._json, accessToken: accessToken })
   ,
-    {conflict: 'update', returnChanges: true}
+    { conflict: 'update', returnChanges: true }
   ).execute((err, res) => {
     cb(err, res && new User(res.changes[0].new_val))
   })
@@ -73,7 +73,7 @@ const callback = passport.authenticate('facebook', {
   display: strategyConfig.display,
   failureRedirect: '/login'
 })
-const router = Router({mergeParams: true})
+const router = Router({ mergeParams: true })
 router.get('/auth/facebook/start', storeRedirect, start)
 router.get('/auth/facebook/callback', callback, performRedirect)
 

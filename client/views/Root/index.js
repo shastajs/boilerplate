@@ -1,7 +1,8 @@
+/* eslint react/forbid-prop-types: 0 */
 import { Provider } from 'shasta'
 import { Router } from 'shasta-router'
 import React from 'react'
-import {Component, PropTypes} from 'shasta'
+import { Component, PropTypes } from 'shasta'
 
 import 'semantic-ui-css/semantic.css'
 import './index.sass'
@@ -14,14 +15,15 @@ class RootView extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidMount () {
+  componentDidMount() {
     console.log('Actions:', this.actions)
+    console.log(this.props)
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.props.store}>
-        <div className='root-view'>
+        <div className="root-view">
           <Router history={this.props.history}>
             {this.props.routes}
           </Router>

@@ -9,7 +9,7 @@ export default (opt, cb) => {
   }
   */
 
-  var q = decl(User, {
+  const q = decl(User, {
     ...opt.options,
     tail: opt.tail
   })

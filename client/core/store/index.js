@@ -4,14 +4,12 @@ import plugins from '../plugins'
 import initialState from './initialState'
 
 const hotReload = (store) => {
-  if (!module.hot) return store
-  const reducersPath = 'reducers/.lookup'
-  module.hot.accept(reducersPath, () =>
+  if (!module.hot) return
+  module.hot.accept('reducers/.lookup', () =>
     store.replaceReducers([
-      createReducer(require(reducersPath))
+      createReducer(require('reducers/.lookup'))
     ])
   )
-  return store
 }
 
 export const configureStore = (initialState) => {
