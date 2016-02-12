@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-// const rethinkCert = fs.readFileSync(path.join(__dirname, './rethinkdb.ca'), 'utf8')
+const rethinkCert = fs.readFileSync(path.join(__dirname, './rethinkdb.ca'), 'utf8')
 
 const config = {
   // databases
@@ -16,6 +16,11 @@ const config = {
       ca: rethinkCert
     },
     enforce_extra: 'remove'
+  },
+
+  http: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 3000
   },
 
   // auth stuff

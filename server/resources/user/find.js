@@ -1,22 +1,17 @@
 import User from './model'
 import decl from 'rethink-decl'
-import changeStream from 'rethinkdb-change-stream'
+import { screenDeep } from 'palisade'
 
-export default (opt, cb) => {
-  /*
-  if (!User.authorized('list', opt.user)) {
-    return cb({status: 403})
-  }
-  */
+export const tailable = true
+export const isAuthorized = (opt, cb) =>
+  // cb(null, User.authorized('list', opt.user))
+  cb(null, true)
 
-  const q = decl(User, {
+export const createQuery = (opt, cb) =>
+  cb(null, decl(User, {
     ...opt.options,
     tail: opt.tail
-  })
+  }))
 
-  if (opt.tail) {
-    return changeStream(q)
-  } else {
-    q.run(cb)
-  }
-}
+export const formatResponse = (opt, data) =>
+  screenDeep(opt.user, data)

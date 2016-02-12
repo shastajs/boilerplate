@@ -1,14 +1,14 @@
 import User from './model'
+import { screenDeep } from 'palisade'
 
-export default (opt, cb) => {
-  if (!User.authorized('update', opt.user, { id: opt.id })) {
-    return cb({ status: 403 })
-  }
+export const tailable = false
+export const isAuthorized = (opt, cb) =>
+  cb(null, User.authorized('update', opt.user, { id: opt.id }))
 
+export const createQuery = (opt, cb) => {
   const change = User.screen('write', opt.user, opt.data)
-  User.get(opt.id)
-    .update(change, { returnChanges: true })
-    .execute((err, res) => {
-      cb(err, res && new User(res.changes[0].new_val))
-    })
+  cb(null, User.get(opt.id).update(change, { returnChanges: true }))
 }
+
+export const formatResponse = (opt, data) =>
+  screenDeep(opt.user, data)
