@@ -34,6 +34,11 @@ const config = {
       'user_birthday',
       'user_location'
     ]
+  },
+
+  http: {
+    host: '0.0.0.0',
+    port: process.env.PORT
   }
 }
 
