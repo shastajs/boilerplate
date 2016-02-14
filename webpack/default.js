@@ -67,9 +67,9 @@ const webpackConfig = {
     })
   ],
   resolve: {
-    modulesDirectories: ['local_modules', 'node_modules'],
+    modulesDirectories: [ 'local_modules', 'node_modules' ],
     root: config.paths.client,
-    extensions: ['', '.js', '.jsx']
+    extensions: [ '', '.js', '.jsx' ]
   },
   module: {
     preLoaders: [
@@ -93,7 +93,7 @@ const webpackConfig = {
       autoprefixer: {
         add: true,
         remove: true,
-        browsers: ['last 2 versions']
+        browsers: [ 'last 2 versions' ]
       },
       discardComments: {
         removeAll: true
