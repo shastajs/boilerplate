@@ -1,6 +1,6 @@
 import rethink from 'connections/rethink'
 import palisade from 'palisade'
-const { type, r } = rethink
+const { type } = rethink
 
 const User = rethink.createModel('User', {
   // core fields
@@ -10,9 +10,9 @@ const User = rethink.createModel('User', {
     'admin'
   ]).default('pleb'),
   times: {
-    created: type.date().default(r.now()),
-    lastModified: type.date().default(r.now()),
-    lastLogin: type.date().default(r.now())
+    created: type.date().default(Date.now),
+    lastModified: type.date().default(Date.now),
+    lastLogin: type.date().default(Date.now)
   },
 
   // auth info
