@@ -7,7 +7,7 @@ export const isAuthorized = (opt, cb) =>
 
 export const createQuery = (opt, cb) => {
   const change = User.screen('write', opt.user, opt.data)
-  cb(null, User.get(opt.id).replace(change, { returnChanges: true }))
+  cb(null, User.get(opt.id).replace(new User(change), { returnChanges: true }))
 }
 
 export const formatResponse = (opt, data) =>

@@ -4,8 +4,7 @@ import { screenDeep } from 'palisade'
 
 export const tailable = true
 export const isAuthorized = (opt, cb) =>
-  // cb(null, User.authorized('list', opt.user))
-  cb(null, true)
+  cb(null, User.authorized('list', opt.user))
 
 export const createQuery = (opt, cb) =>
   cb(null, decl(User, {
