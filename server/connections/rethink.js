@@ -9,7 +9,7 @@ const db = thinky(config.rethink)
 db.r.getPoolMaster()._flushErrors = () => {}
 
 db.r.tableList().then(() => {
-  debug(`RethinkDB connected`)
+  debug('RethinkDB connected')
 })
 
 db.r.getPoolMaster().on('healthy', (healthy) => {
