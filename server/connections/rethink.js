@@ -7,13 +7,16 @@ const debug = _debug('app:db:rethink')
 const db = thinky(config.rethink)
 
 db.r.getPoolMaster()._flushErrors = () => {}
-// db.r.getPoolMaster().on('log', (msg) => {})
+
+db.r.tableList().then(() => {
+  debug(`RethinkDB connected`)
+})
 
 db.r.getPoolMaster().on('healthy', (healthy) => {
   if (healthy) {
-    debug('RethinkDB connected!')
+    debug('RethinkDB connected')
   } else {
-    debug(chalk.red('RethinkDB failed to connect!'))
+    debug(chalk.red('RethinkDB failed to connect'))
   }
 })
 
