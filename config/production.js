@@ -8,6 +8,7 @@ const config = {
   redis: process.env.REDIS_URL,
 
   rethink: {
+    silent: true,
     host: 'your-host (compose.io is cool)',
     port: 11244,
     db: 'stack',
