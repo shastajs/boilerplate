@@ -17,7 +17,6 @@ class RootView extends Component {
 
   componentDidMount() {
     console.log('Actions:', this.actions)
-    console.log(this.props)
   }
 
   render() {
