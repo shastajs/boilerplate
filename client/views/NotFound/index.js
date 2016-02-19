@@ -1,23 +1,23 @@
-import { Link } from 'shasta-router'
-import { Grid, Header, Row, Column } from 'react-semantify'
-import { Component } from 'shasta'
 import React from 'react'
+import { Link } from 'shasta-router'
+import { Component } from 'shasta'
 import DocumentMeta from 'react-document-meta'
+import Title from 'components/Title'
 import './index.sass'
 
 class NotFoundView extends Component {
   static displayName = 'NotFoundView';
   render() {
     return (
-      <Grid className="not-found-view middle aligned one column centered">
+      <div className="ui grid not-found-view middle aligned one column centered">
         <DocumentMeta title="Not Found" />
-        <Row>
-          <Column className="eight wide middle aligned">
-            <Header className="large">The page you requested does not exist!</Header>
+        <div className="ui row">
+          <div className="ui column eight wide middle aligned">
+            <Title>The page you requested does not exist!</Title>
             <Link to="/">Back To Home</Link>
-          </Column>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+      </div>
     )
   }
 }
