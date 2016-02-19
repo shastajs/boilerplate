@@ -1,8 +1,12 @@
 /* eslint react/forbid-prop-types: 0 */
-import { Provider } from 'shasta'
-import { Router } from 'shasta-router'
 import React from 'react'
-import { Component, PropTypes } from 'shasta'
+import { Provider, Component, PropTypes } from 'shasta'
+import { Route, IndexRoute, Router } from 'shasta-router'
+
+import HomeView from 'views/Home'
+import AboutView from 'views/About'
+import TodosView from 'views/Todos'
+import NotFoundView from 'views/NotFound'
 
 import 'semantic-ui-css/semantic.css'
 import './index.sass'
@@ -11,7 +15,6 @@ class RootView extends Component {
   static displayName = 'RootView';
   static propTypes = {
     history: PropTypes.object.isRequired,
-    routes: PropTypes.element.isRequired,
     store: PropTypes.object.isRequired
   };
 
@@ -24,7 +27,13 @@ class RootView extends Component {
       <Provider store={this.props.store}>
         <div className="root-view">
           <Router history={this.props.history}>
-            {this.props.routes}
+            <Route path="/">
+              <IndexRoute component={HomeView} />
+              <Route path="/about" component={AboutView} />
+              <Route path="/todos" component={TodosView} />
+              <Route path="/todos/:filter" component={TodosView} />
+              <Route path="*" component={NotFoundView}/>
+            </Route>
           </Router>
         </div>
       </Provider>
