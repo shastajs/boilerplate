@@ -9,7 +9,7 @@ const db = thinky(config.rethink)
 let connected = false
 db.r.getPoolMaster().on('available-size', (size) => {
   if (connected) return
-  debug(`RethinkDB connected (${size})`)
+  debug(`RethinkDB connected (Pool: ${size})`)
   connected = true
 })
 db.r.getPoolMaster()._flushErrors = () => {}

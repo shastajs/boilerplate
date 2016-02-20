@@ -35,6 +35,14 @@ const config = {
       'user_birthday',
       'user_location'
     ]
+  },
+
+  google: {
+    id: 'get-your-own',
+    secret: 'get-your-own',
+    scope: [
+      'profile'
+    ]
   }
 }
 

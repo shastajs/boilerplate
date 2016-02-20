@@ -20,6 +20,10 @@ const User = rethink.createModel('User', {
     id: type.string(),
     accessToken: type.string()
   },
+  google: {
+    id: type.string(),
+    accessToken: type.string()
+  },
 
   // user info
   name: type.string(),
