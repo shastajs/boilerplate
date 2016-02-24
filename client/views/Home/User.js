@@ -26,7 +26,7 @@ class User extends DataComponent {
         className="ui image user-image"
         src={user.get('avatar_url')}
         style={this.props.greyscale ? { WebkitFilter: 'grayscale(100%)' } : {}}
-        onClick={this.actions.user.toggleGreyscale}
+        onClick={() => this.actions.user.toggleGreyscale()}
       />
       <div className="ui content">
         <div className="ui header">{user.get('name')}</div>
