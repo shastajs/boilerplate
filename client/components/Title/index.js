@@ -9,11 +9,8 @@ export class Title extends Component {
     className: PropTypes.string
   };
   render() {
-    return (<div
-      {...this.props}
-      className={
-        classNames('title-component', this.props.className)
-      } />)
+    const ourClass = classNames('title-component', this.props.className)
+    return (<div {...this.props} className={ourClass} />)
   }
 }
 
