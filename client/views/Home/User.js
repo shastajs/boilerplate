@@ -23,7 +23,7 @@ class User extends DataComponent {
   renderData({ user }) {
     return (<div className="ui card">
       <img
-        className="ui image"
+        className="ui image user-image"
         src={user.get('avatar_url')}
         style={this.props.greyscale ? { WebkitFilter: 'grayscale(100%)' } : {}}
         onClick={this.actions.user.toggleGreyscale}
