@@ -6,10 +6,12 @@ import './index.sass'
 class User extends DataComponent {
   static displayName = 'User';
   static propTypes = {
-    repos: PropTypes.iterable
+    repos: PropTypes.iterable,
+    greyscale: PropTypes.string.isRequired
   };
   static storeProps = {
-    user: 'requests.user'
+    user: 'requests.user',
+    greyscale: 'user.greyscale'
   };
 
   fetch() {
@@ -18,10 +20,14 @@ class User extends DataComponent {
     }
     this.actions.github.getUser({ requestId: 'user', params: opt })
   }
-
   renderData({ user }) {
     return (<div className="ui card">
-      <img className="ui image" src={user.get('avatar_url')} />
+      <img
+        className="ui image"
+        src={user.get('avatar_url')}
+        style={this.props.greyscale ? { WebkitFilter: 'grayscale(100%)' } : {}}
+        onClick={this.actions.user.toggleGreyscale}
+      />
       <div className="ui content">
         <div className="ui header">{user.get('name')}</div>
         <div className="description">{user.get('email')}</div>
