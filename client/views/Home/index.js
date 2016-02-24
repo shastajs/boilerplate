@@ -51,13 +51,19 @@ class HomeView extends Component {
             <div className="ui header counter">{this.props.count}</div>
             <div className="ui large buttons">
               <div className="ui button medium positive" onClick={() => this.actions.counter.increment()}>
+                <i className="plus icon"></i>
                 Increment
               </div>
               <div className="or"/>
-              <div className="ui button medium negative" onClick={() => this.actions.counter.decrement()}>
-                Decrement
+
+              <div className="ui labeled button">
+                <div className="ui button medium negative" onClick={() => this.actions.counter.decrement()}>
+                  <i className="minus icon"></i>
+                  Decrement
+                </div>
+                <div className="ui basic red left pointing label" onClick={() => this.actions.counter.reset()}> Reset </div>
               </div>
-            </div>
+              </div>
           </div>
         </div>
         <div className="github-data ui container">
