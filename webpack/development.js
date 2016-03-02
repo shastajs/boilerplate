@@ -12,6 +12,8 @@ export default (webpackConfig) => {
     lazy: false
   }
 
+  webpackConfig.devtool = 'source-map'
+
   webpackConfig.entry.app.push(
     'webpack-hot-middleware/client?path=/__webpack_hmr'
   )
