@@ -1,12 +1,11 @@
 import User from './model'
 import { screenDeep } from 'palisade'
 
-export const tailable = false
-export const isAuthorized = (opt, cb) =>
-  cb(null, User.authorized('delete', opt.user, { id: opt.id }))
+export const isAuthorized = ({ id, user }) =>
+  User.authorized('delete', user, { id })
 
-export const createQuery = (opt, cb) =>
-  cb(null, User.delete(opt.id))
+export const process = ({ id }) =>
+  User.purge(id)
 
-export const formatResponse = (opt, data) =>
-  screenDeep(opt.user, data)
+export const format = ({ user }, data) =>
+  screenDeep(user, data)
