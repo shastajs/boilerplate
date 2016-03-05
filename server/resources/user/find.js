@@ -12,7 +12,7 @@ export const process = ({ options, tail }) => {
     ...options,
     tail
   })
-  return tail ? changeStream(query) : query
+  return tail ? changeStream(query) : query.run()
 }
 
 export const format = ({ user }, data) =>
