@@ -7,7 +7,7 @@ export const isAuthorized = ({ user, id }) =>
   User.authorized('read', user, { id })
 
 export const process = ({ tail, id }) =>
-  tail ? changeStream(User.filter({ id }).changes()) : User.get(id).run()
+  tail ? changeStream(User.filter({ id }).changes()) : User.get(id).execute()
 
 export const format = ({ user }, data) =>
   screenDeep(user, data)

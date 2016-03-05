@@ -6,7 +6,7 @@ export const isAuthorized = ({ user, id }) =>
 
 export const process = ({ user, id, data }) => {
   const change = User.screen('write', user, data)
-  User.get(id).update(change, { returnChanges: true }).run()
+  User.get(id).update(change, { returnChanges: true }).execute()
 }
 
 export const format = ({ user }, data) =>
