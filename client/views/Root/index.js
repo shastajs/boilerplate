@@ -7,11 +7,10 @@ import HomeView from 'views/Home'
 import AboutView from 'views/About'
 import TodosView from 'views/Todos'
 import NotFoundView from 'views/NotFound'
-
-// any global stuff
-import fixHash from 'remove-fb-hash'
-import 'semantic-ui-css/semantic.css'
 import './index.sass'
+
+// some global crap
+import fixHash from 'remove-fb-hash'
 fixHash()
 
 class RootView extends Component {
