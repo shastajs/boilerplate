@@ -6,7 +6,7 @@ import Title from 'components/Title'
 import './index.sass'
 
 class NotFoundView extends Component {
-  static displayName = 'NotFoundView';
+  static displayName = 'NotFoundView'
   render() {
     return (
       <div className="ui grid not-found-view middle aligned one column centered">

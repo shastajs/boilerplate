@@ -6,7 +6,7 @@ import Title from 'components/Title'
 import './index.sass'
 
 class AboutView extends Component {
-  static displayName = 'AboutView';
+  static displayName = 'AboutView'
   render() {
     return (
       <div className="ui grid about-view middle aligned one column centered">

@@ -5,13 +5,13 @@ import DataComponent from 'shasta-data-view'
 import './index.sass'
 
 class RepoList extends DataComponent {
-  static displayName = 'RepoList';
+  static displayName = 'RepoList'
   static propTypes = {
     repos: PropTypes.iterable
-  };
+  }
   static storeProps = {
     repos: 'requests.repos'
-  };
+  }
 
   fetch() {
     const opt = {

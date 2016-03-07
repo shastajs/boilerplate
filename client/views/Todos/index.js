@@ -15,18 +15,18 @@ const filters = {
 }
 
 class TodosView extends Component {
-  static displayName = 'TodosView';
+  static displayName = 'TodosView'
   static propTypes = {
     params: PropTypes.shape({
       filter: PropTypes.string
     }).isRequired,
     todos: PropTypes.mapOf(PropTypes.map).isRequired,
     toggled: PropTypes.bool.isRequired
-  };
+  }
   static storeProps = {
     todos: 'todomvc.items',
     toggled: 'todomvc.toggle'
-  };
+  }
 
   addTodo(e) {
     const el = this._input

@@ -4,13 +4,13 @@ import DataComponent from 'shasta-data-view'
 import './index.sass'
 
 class UserList extends DataComponent {
-  static displayName = 'UserList';
+  static displayName = 'UserList'
   static propTypes = {
     users: PropTypes.iterable
-  };
+  }
   static storeProps = {
     users: 'requests.users'
-  };
+  }
 
   fetch() {
     this.actions.api.users.find({ requestId: 'users' })

@@ -4,15 +4,15 @@ import DataComponent from 'shasta-data-view'
 import './index.sass'
 
 class User extends DataComponent {
-  static displayName = 'User';
+  static displayName = 'User'
   static propTypes = {
     repos: PropTypes.iterable,
     greyscale: PropTypes.string.isRequired
-  };
+  }
   static storeProps = {
     user: 'requests.user',
     greyscale: 'user.greyscale'
-  };
+  }
 
   fetch() {
     const opt = {

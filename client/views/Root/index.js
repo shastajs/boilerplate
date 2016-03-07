@@ -15,11 +15,11 @@ import './index.sass'
 fixHash()
 
 class RootView extends Component {
-  static displayName = 'RootView';
+  static displayName = 'RootView'
   static propTypes = {
     history: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
-  };
+  }
 
   componentDidMount() {
     console.log('Actions:', this.actions)

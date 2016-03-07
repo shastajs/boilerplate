@@ -10,19 +10,19 @@ import User from './User'
 import './index.sass'
 
 class HomeView extends Component {
-  static displayName = 'HomeView';
+  static displayName = 'HomeView'
   static propTypes = {
     count: PropTypes.number.isRequired,
     me: PropTypes.map.isRequired,
     name: PropTypes.string.isRequired
-  };
+  }
   static defaultProps = {
     name: 'tj'
-  };
+  }
   static storeProps = {
     count: 'counter.count',
     me: 'me'
-  };
+  }
 
   render() {
     return (
