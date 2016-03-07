@@ -4,14 +4,14 @@ import classNames from 'classnames'
 import './index.sass'
 
 class Todo extends Component {
-  static displayName = 'Todo';
+  static displayName = 'Todo'
   static propTypes = {
     todo: PropTypes.map.isRequired
-  };
+  }
 
   static defaultState = {
     editing: false
-  };
+  }
 
   handleDestroyClick() {
     this.actions.todomvc.remove(this.props.todo)

@@ -5,13 +5,13 @@ import DataComponent from 'shasta-data-view'
 import './index.sass'
 
 class OrgList extends DataComponent {
-  static displayName = 'OrgList';
+  static displayName = 'OrgList'
   static propTypes = {
     orgs: PropTypes.iterable
-  };
+  }
   static storeProps = {
     orgs: 'requests.orgs'
-  };
+  }
 
   fetch() {
     const opt = {
