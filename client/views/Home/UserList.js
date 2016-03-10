@@ -1,7 +1,10 @@
 import React from 'react'
 import { PropTypes } from 'shasta'
 import DataComponent from 'shasta-data-view'
-import './index.sass'
+import {
+  Media, Heading, Text,
+  Panel, PanelHeader
+} from 'rebass'
 
 class UserList extends DataComponent {
   static displayName = 'UserList'
@@ -9,41 +12,40 @@ class UserList extends DataComponent {
     users: PropTypes.iterable
   }
   static storeProps = {
-    users: 'requests.users'
+    users: 'subsets.users'
   }
 
   fetch() {
-    this.actions.api.users.find({ requestId: 'users' })
-    this.actions.api.users.find({ requestId: 'users', tail: true })
+    this.actions.api.users.find({ subset: 'users' })
+    this.actions.api.users.find({ subset: 'users', tail: true })
   }
 
   renderData({ users }) {
-    return (<div className="ui list relaxed column">
-      <div className="ui header">{users.size} Users</div>
+    return (<Panel rounded>
+      <PanelHeader>DB Users</PanelHeader>
       {
-        users.map((user) =>
-          <div className="ui item" key={user.get('id')}>
-            <i className="ui icon large user middle aligned"/>
-            <div className="content">
-              <div className="ui header">{user.get('name')}</div>
-            </div>
-          </div>
+        users.map(user =>
+          <Media key={user.get('id')} align="center" img={user.get('image')}>
+            <Heading level={3}>{user.get('name')}</Heading>
+          </Media>
         )
       }
-    </div>)
+    </Panel>)
   }
-  renderLoader() {
-    return <div className="ui header">Loading...</div>
-  }
+
   renderErrors(errors) {
-    return (<div className="errors">
-      Failed to Load:
+    return (<Panel rounded>
+      <PanelHeader>DB Users</PanelHeader>
+      <Heading>Failed to Load!</Heading>
       {
         errors.map((err, field) =>
-          <div key={field}>{field}: {err.message}</div>
+          <Media key={field} align="center">
+            <Heading level={3}>{field}</Heading>
+            <Text>{err.message}</Text>
+          </Media>
         ).toArray()
       }
-    </div>)
+    </Panel>)
   }
 }
 

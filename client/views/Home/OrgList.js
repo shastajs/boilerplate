@@ -1,61 +1,63 @@
 import React from 'react'
 import jif from 'jif'
 import { PropTypes } from 'shasta'
+import {
+  Media, Heading, Text,
+  Panel, PanelHeader
+} from 'rebass'
 import DataComponent from 'shasta-data-view'
-import './index.sass'
 
 class OrgList extends DataComponent {
   static displayName = 'OrgList'
   static propTypes = {
+    name: PropTypes.string.isRequired,
     orgs: PropTypes.iterable
   }
   static storeProps = {
-    orgs: 'requests.orgs'
+    orgs: 'subsets.orgs'
   }
 
   fetch() {
-    const opt = {
-      name: this.props.name
-    }
-    this.actions.github.getOrganizations({ requestId: 'orgs', params: opt })
+    this.actions.github.getOrganizations({
+      subset: 'orgs',
+      params: {
+        name: this.props.name
+      }
+    })
   }
 
   renderData({ orgs }) {
-    return (<div className="ui list relaxed column">
-      <div className="ui header">{orgs.size} Orgs</div>
+    return (<Panel rounded>
+      <PanelHeader>Organizations</PanelHeader>
       {
-        this.props.orgs.map(org =>
-          <div className="ui item" key={org.get('id')}>
-            <i className="ui icon large github middle aligned"/>
-            <div className="content">
-              <div className="ui header">{org.get('login')}</div>
-              <div className="description">
-              {
-                jif(org.has('description'), () =>
-                  <div className="description">
-                    {org.get('description')}
-                  </div>
-                )
-              }
-              </div>
-            </div>
-          </div>
+        orgs.map(org =>
+          <Media key={org.get('id')} align="center" img={org.get('avatar_url')}>
+            <Heading level={3}>{org.get('login')}</Heading>
+            {
+              jif(org.has('description'), () =>
+                <Text className="description">
+                  {org.get('description')}
+                </Text>
+              )
+            }
+          </Media>
         )
       }
-    </div>)
-  }
-  renderLoader() {
-    return <div className="ui header">Loading...</div>
+    </Panel>)
   }
   renderErrors(errors) {
-    return (<div className="errors">
-      Failed to Load:
+    return (<Panel rounded>
+      <PanelHeader>Organizations</PanelHeader>
+      <Heading>Failed to Load!</Heading>
       {
         errors.map((err, field) =>
-          <div key={field}>{field}: {err.message}</div>
+          <Media key={field} align="center">
+            <Heading level={3}>{field}</Heading>
+            <Text>{err.message}</Text>
+          </Media>
         ).toArray()
       }
-    </div>)
+    </Panel>)
   }
 }
 

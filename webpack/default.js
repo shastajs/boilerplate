@@ -67,7 +67,7 @@ const webpackConfig = {
     })
   ],
   resolve: {
-    modulesDirectories: [ 'local_modules', 'node_modules' ],
+    modulesDirectories: [ 'node_modules' ],
     root: config.paths.client,
     extensions: [ '', '.js', '.jsx' ]
   },

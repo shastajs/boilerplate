@@ -1,58 +1,62 @@
 import React from 'react'
 import { PropTypes } from 'shasta'
+import {
+  Text, Heading,
+  Panel, PanelHeader, Banner, Media
+} from 'rebass'
 import DataComponent from 'shasta-data-view'
-import './index.sass'
 
 class User extends DataComponent {
   static displayName = 'User'
   static propTypes = {
-    repos: PropTypes.iterable,
-    greyscale: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    user: PropTypes.iterable
   }
   static storeProps = {
-    user: 'requests.user',
-    greyscale: 'user.greyscale'
+    user: 'subsets.user'
   }
 
   fetch() {
-    const opt = {
-      name: this.props.name
-    }
-    this.actions.github.getUser({ requestId: 'user', params: opt })
+    this.actions.github.getUser({
+      subset: 'user',
+      params: {
+        name: this.props.name
+      }
+    })
   }
+
   renderData({ user }) {
-    return (<div className="ui card">
-      <img
-        className="ui image user-image"
-        src={user.get('avatar_url')}
-        style={this.props.greyscale ? { WebkitFilter: 'grayscale(100%)' } : {}}
-        onClick={() => this.actions.user.toggleGreyscale()}
-      />
-      <div className="ui content">
-        <div className="ui header">{user.get('name')}</div>
-        <div className="description">{user.get('email')}</div>
-        <div className="meta">
-          <span className="location">{user.get('location')}</span>
-        </div>
-      </div>
-      <div className="ui extra content">
-        <i className="ui icon user"/>
-        {user.get('followers')} followers
-      </div>
-    </div>)
-  }
-  renderLoader() {
-    return <div className="ui header">Loading...</div>
+    return (
+      <Panel rounded>
+        <PanelHeader>User Info</PanelHeader>
+        <Banner
+          style={{
+            maxHeight: 400,
+            minHeight: 0
+          }}
+          mb={0}
+          align="center"
+          backgroundImage="https://d262ilb51hltx0.cloudfront.net/max/2000/1*DZwdGMaeu-rvTroJYui6Uw.jpeg"
+          >
+            <Heading level={2}>{user.get('name')}</Heading>
+            <Heading level={3}>{user.get('followers')} followers</Heading>
+        </Banner>
+      </Panel>
+    )
   }
   renderErrors(errors) {
-    return (<div className="errors">
-      Failed to Load:
+    return (<Panel rounded>
+      <PanelHeader>User Info</PanelHeader>
+      <Heading>Failed to Load!</Heading>
       {
         errors.map((err, field) =>
-          <div key={field}>{field}: {err.message}</div>
+          <Media key={field} align="center">
+            <Heading level={3}>{field}</Heading>
+            <Text>{err.message}</Text>
+          </Media>
         ).toArray()
       }
-    </div>)
+    </Panel>)
   }
 }
 

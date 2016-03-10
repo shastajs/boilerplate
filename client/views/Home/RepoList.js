@@ -1,59 +1,64 @@
 import React from 'react'
 import jif from 'jif'
+import {
+  Media, Heading, Text,
+  Panel, PanelHeader
+} from 'rebass'
 import { PropTypes } from 'shasta'
 import DataComponent from 'shasta-data-view'
-import './index.sass'
 
 class RepoList extends DataComponent {
   static displayName = 'RepoList'
   static propTypes = {
+    name: PropTypes.string.isRequired,
     repos: PropTypes.iterable
   }
   static storeProps = {
-    repos: 'requests.repos'
+    repos: 'subsets.repos'
   }
 
   fetch() {
-    const opt = {
-      name: this.props.name
-    }
-    this.actions.github.getRepositories({ requestId: 'repos', params: opt })
+    this.actions.github.getRepositories({
+      subset: 'repos',
+      params: {
+        name: this.props.name
+      }
+    })
   }
 
   renderData({ repos }) {
-    return (<div className="ui list relaxed column">
-      <div className="ui header">{repos.size} Repos</div>
+    return (<Panel rounded>
+      <PanelHeader>Repositories</PanelHeader>
       {
-        this.props.repos.map(repo =>
-          <div className="ui item" key={repo.get('id')}>
-            <i className="ui icon large github middle aligned"/>
-            <div className="content">
-              <div className="ui header">{repo.get('full_name')}</div>
-              {
-                jif(repo.has('description'), () =>
-                  <div className="description">
-                    {repo.get('description')}
-                  </div>
-                )
-              }
-            </div>
-          </div>
+        repos.map(repo =>
+          <Media key={repo.get('id')} align="center">
+            <Heading level={3}>{repo.get('full_name')}</Heading>
+            {
+              jif(repo.has('description'), () =>
+                <Text className="description">
+                  {repo.get('description')}
+                </Text>
+              )
+            }
+          </Media>
         )
       }
-    </div>)
+    </Panel>)
   }
-  renderLoader() {
-    return <div className="ui header">Loading...</div>
-  }
+
   renderErrors(errors) {
-    return (<div className="errors">
-      Failed to Load:
+    return (<Panel rounded>
+      <PanelHeader>Repositories</PanelHeader>
+      <Heading>Failed to Load!</Heading>
       {
         errors.map((err, field) =>
-          <div key={field}>{field}: {err.message}</div>
+          <Media key={field} align="center">
+            <Heading level={3}>{field}</Heading>
+            <Text>{err.message}</Text>
+          </Media>
         ).toArray()
       }
-    </div>)
+    </Panel>)
   }
 }
 

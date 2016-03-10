@@ -1,15 +1,19 @@
 $bg:  #fff
-$color: #333
+$color: #111
 
-html, body
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-size: 14px
-  -webkit-font-smoothing: antialiased
-  font-weight: 300
-  line-height: 1.4em
-  background: $bg
+*
+  box-sizing: border-box
+
+body
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif
+  line-height: 1.5
   color: $color
+  background-color: $bg
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
-#root, .root-view
+html, body, #root
   height: 100%
   width: 100%
+  padding: 0
+  margin: 0

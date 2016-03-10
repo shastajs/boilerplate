@@ -1,13 +1,18 @@
 import React from 'react'
 import { Link } from 'shasta-router'
 import { Component, PropTypes } from 'shasta'
+import { Flex, Box } from 'reflexbox'
+import {
+  Toolbar, NavItem, Space,
+  Text, Container, Button,
+  Panel, PanelHeader, PanelFooter
+} from 'rebass'
 import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
 import UserList from './UserList'
 import RepoList from './RepoList'
 import OrgList from './OrgList'
 import User from './User'
-import './index.sass'
 
 class HomeView extends Component {
   static displayName = 'HomeView'
@@ -26,62 +31,70 @@ class HomeView extends Component {
 
   render() {
     return (
-      <div className="ui grid relaxed home-view centered">
+      <Flex align="center" column auto>
         <DocumentMeta title="Home" />
-        <div className="ui menu top attached">
-          <div className="ui item right">
+        <Box col={12}>
+          <Toolbar>
+            <Space auto />
             {
               jif(this.props.me.isEmpty()
               , () =>
-                <a className="ui button primary" href="/auth/facebook/start">
+                <NavItem href="/auth/facebook/start">
                   Sign In
-                </a>
+                </NavItem>
               , () =>
-                <a className="ui button" href="/auth/logout">
+                <NavItem href="/auth/logout">
                   Sign out
-                </a>
+                </NavItem>
               )
             }
-          </div>
-        </div>
-        <div className="ui row">
-          <div className="ui column center aligned">
-            <i className="ui icon trophy huge" />
-            <div className="ui header">Stack Test Page</div>
-            <div className="ui header counter">{this.props.count}</div>
-            <div className="ui large buttons">
-              <div className="ui button medium positive" onClick={() => this.actions.counter.increment()}>
-                <i className="plus icon"></i>
-                Increment
-              </div>
-              <div className="or"/>
+          </Toolbar>
+        </Box>
 
-              <div className="ui labeled button">
-                <div className="ui button medium negative" onClick={() => this.actions.counter.decrement()}>
-                  <i className="minus icon"></i>
+        <Box p={2} sm={12} md={6} lg={4}>
+          <Panel rounded>
+            <PanelHeader>Counter</PanelHeader>
+            <Container>
+              <Text>Current: {this.props.count}</Text>
+            </Container>
+            <PanelFooter>
+              <Flex justify="space-between" auto wrap>
+                <Button onClick={() => this.actions.counter.increment()}>
+                  Increment
+                </Button>
+                <Button onClick={() => this.actions.counter.decrement()}>
                   Decrement
-                </div>
-                <div className="ui basic red left pointing label" onClick={() => this.actions.counter.reset()}> Reset </div>
-              </div>
-              </div>
-          </div>
-        </div>
-        <div className="github-data ui container">
-          <div className="ui grid relaxed centered">
-            <div className="ui row">
-              <User name={this.props.name}/>
-            </div>
-            <div className="ui row equal width">
-              <OrgList name={this.props.name}/>
-              <RepoList name={this.props.name}/>
-              <UserList/>
-            </div>
-          </div>
-        </div>
-        <div className="ui row">
+                </Button>
+                <Button onClick={() => this.actions.counter.reset()}>
+                  Reset
+                </Button>
+              </Flex>
+            </PanelFooter>
+          </Panel>
+        </Box>
+
+        <Box p={2} sm={12} md={6} lg={4}>
+          <User name={this.props.name}/>
+        </Box>
+
+        <Flex align="flex-start" auto>
+          <Box p={2} sm={12} md={4} lg={4}>
+            <OrgList name={this.props.name}/>
+          </Box>
+
+          <Box p={2} sm={12} md={4} lg={4}>
+            <RepoList name={this.props.name}/>
+          </Box>
+
+          <Box p={2} sm={12} md={4} lg={4}>
+            <UserList/>
+          </Box>
+        </Flex>
+
+        <Flex align="center" auto>
           <Link to="/about">Go To About View</Link>
-        </div>
-      </div>
+        </Flex>
+      </Flex>
     )
   }
 }
