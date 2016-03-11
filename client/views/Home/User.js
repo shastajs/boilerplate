@@ -18,7 +18,6 @@ export default class User extends DataComponent {
   }
 
   resolveData() {
-    console.log('resolve')
     actions.github.getUser({
       subset: 'user',
       params: {
