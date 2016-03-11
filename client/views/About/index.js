@@ -22,4 +22,4 @@ class AboutView extends Component {
   }
 }
 
-export default Component.connect(AboutView, require('core/actions'))
+export default AboutView

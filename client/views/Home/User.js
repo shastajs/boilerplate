@@ -1,23 +1,25 @@
 import React from 'react'
-import { PropTypes } from 'shasta'
+import { PropTypes, connect } from 'shasta'
 import {
   Text, Heading,
   Panel, PanelHeader, Banner, Media
 } from 'rebass'
+import actions from 'core/actions'
 import DataComponent from 'shasta-data-view'
 
-class User extends DataComponent {
+@connect({
+  user: 'subsets.user'
+})
+export default class User extends DataComponent {
   static displayName = 'User'
   static propTypes = {
     name: PropTypes.string.isRequired,
     user: PropTypes.iterable
   }
-  static storeProps = {
-    user: 'subsets.user'
-  }
 
-  fetch() {
-    this.actions.github.getUser({
+  resolveData() {
+    console.log('resolve')
+    actions.github.getUser({
       subset: 'user',
       params: {
         name: this.props.name
@@ -59,5 +61,3 @@ class User extends DataComponent {
     </Panel>)
   }
 }
-
-export default DataComponent.connect(User, require('core/actions'))

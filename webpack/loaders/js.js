@@ -1,3 +1,5 @@
+import { babel } from '../../package'
+
 export default [
   {
     test: /\.(js|jsx)$/,
@@ -5,8 +7,8 @@ export default [
     loader: 'babel',
     query: {
       cacheDirectory: true,
-      plugins: [ 'transform-runtime', 'add-module-exports' ],
-      presets: [ 'es2015', 'react', 'stage-0' ],
+      plugins: babel.plugins,
+      presets: babel.presets,
       env: {
         development: {
           plugins: [

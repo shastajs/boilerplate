@@ -14,4 +14,4 @@ export class Title extends Component {
   }
 }
 
-export default Component.connect(Title, require('core/actions'))
+export default Title

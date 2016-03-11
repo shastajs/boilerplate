@@ -1,24 +1,25 @@
 import React from 'react'
 import jif from 'jif'
-import { PropTypes } from 'shasta'
+import { PropTypes, connect } from 'shasta'
+import actions from 'core/actions'
 import {
   Media, Heading, Text,
   Panel, PanelHeader
 } from 'rebass'
 import DataComponent from 'shasta-data-view'
 
-class OrgList extends DataComponent {
+@connect({
+  orgs: 'subsets.orgs'
+})
+export default class OrgList extends DataComponent {
   static displayName = 'OrgList'
   static propTypes = {
     name: PropTypes.string.isRequired,
     orgs: PropTypes.iterable
   }
-  static storeProps = {
-    orgs: 'subsets.orgs'
-  }
 
-  fetch() {
-    this.actions.github.getOrganizations({
+  resolveData() {
+    actions.github.getOrganizations({
       subset: 'orgs',
       params: {
         name: this.props.name
@@ -60,5 +61,3 @@ class OrgList extends DataComponent {
     </Panel>)
   }
 }
-
-export default DataComponent.connect(OrgList, require('core/actions'))

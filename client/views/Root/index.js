@@ -4,6 +4,7 @@ import { Provider, Component, PropTypes } from 'shasta'
 import { Route, IndexRoute, Router } from 'shasta-router'
 import { Flex } from 'reflexbox'
 
+import actions from 'core/actions'
 import HomeView from 'views/Home'
 import AboutView from 'views/About'
 import NotFoundView from 'views/NotFound'
@@ -13,23 +14,23 @@ import './index.sass'
 import fixHash from 'remove-fb-hash'
 fixHash()
 
-class RootView extends Component {
+export default class RootView extends Component {
   static displayName = 'RootView'
   static propTypes = {
     history: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired
   }
 
   componentDidMount() {
-    console.log('Actions:', this.actions)
+    console.log('Actions:', actions)
   }
 
   render() {
+    const { store, history } = this.props
     return (
-      <Provider store={this.props.store} actions={this.props.actions}>
+      <Provider store={store}>
         <Flex auto>
-          <Router history={this.props.history}>
+          <Router history={history}>
             <Route path="/">
               <IndexRoute component={HomeView} />
               <Route path="/about" component={AboutView} />
@@ -41,5 +42,3 @@ class RootView extends Component {
     )
   }
 }
-
-export default Component.connect(RootView, require('core/actions'))

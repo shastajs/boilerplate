@@ -1,23 +1,24 @@
 import React from 'react'
-import { PropTypes } from 'shasta'
+import { PropTypes, connect } from 'shasta'
 import DataComponent from 'shasta-data-view'
+import actions from 'core/actions'
 import {
   Media, Heading, Text,
   Panel, PanelHeader
 } from 'rebass'
 
-class UserList extends DataComponent {
+@connect({
+  users: 'subsets.users'
+})
+export default class UserList extends DataComponent {
   static displayName = 'UserList'
   static propTypes = {
     users: PropTypes.iterable
   }
-  static storeProps = {
-    users: 'subsets.users'
-  }
 
-  fetch() {
-    this.actions.api.users.find({ subset: 'users' })
-    this.actions.api.users.find({ subset: 'users', tail: true })
+  resolveData() {
+    actions.api.users.find({ subset: 'users' })
+    actions.api.users.find({ subset: 'users', tail: true })
   }
 
   renderData({ users }) {
@@ -48,5 +49,3 @@ class UserList extends DataComponent {
     </Panel>)
   }
 }
-
-export default DataComponent.connect(UserList, require('core/actions'))

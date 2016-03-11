@@ -4,21 +4,22 @@ import {
   Media, Heading, Text,
   Panel, PanelHeader
 } from 'rebass'
-import { PropTypes } from 'shasta'
+import actions from 'core/actions'
+import { PropTypes, connect } from 'shasta'
 import DataComponent from 'shasta-data-view'
 
-class RepoList extends DataComponent {
+@connect({
+  repos: 'subsets.repos'
+})
+export default class RepoList extends DataComponent {
   static displayName = 'RepoList'
   static propTypes = {
     name: PropTypes.string.isRequired,
     repos: PropTypes.iterable
   }
-  static storeProps = {
-    repos: 'subsets.repos'
-  }
 
-  fetch() {
-    this.actions.github.getRepositories({
+  resolveData() {
+    actions.github.getRepositories({
       subset: 'repos',
       params: {
         name: this.props.name
@@ -61,5 +62,3 @@ class RepoList extends DataComponent {
     </Panel>)
   }
 }
-
-export default DataComponent.connect(RepoList, require('core/actions'))

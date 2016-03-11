@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'shasta-router'
-import { Component, PropTypes } from 'shasta'
+import { Component, PropTypes, connect } from 'shasta'
 import { Flex, Box } from 'reflexbox'
 import {
   Toolbar, NavItem, Space,
@@ -8,13 +8,18 @@ import {
   Panel, PanelHeader, PanelFooter
 } from 'rebass'
 import jif from 'jif'
+import actions from 'core/actions'
 import DocumentMeta from 'react-document-meta'
 import UserList from './UserList'
 import RepoList from './RepoList'
 import OrgList from './OrgList'
 import User from './User'
 
-class HomeView extends Component {
+@connect({
+  count: 'counter.count',
+  me: 'me'
+})
+export default class HomeView extends Component {
   static displayName = 'HomeView'
   static propTypes = {
     count: PropTypes.number.isRequired,
@@ -23,10 +28,6 @@ class HomeView extends Component {
   }
   static defaultProps = {
     name: 'tj'
-  }
-  static storeProps = {
-    count: 'counter.count',
-    me: 'me'
   }
 
   render() {
@@ -59,13 +60,13 @@ class HomeView extends Component {
             </Container>
             <PanelFooter>
               <Flex justify="space-between" auto wrap>
-                <Button onClick={() => this.actions.counter.increment()}>
+                <Button onClick={() => actions.counter.increment()}>
                   Increment
                 </Button>
-                <Button onClick={() => this.actions.counter.decrement()}>
+                <Button onClick={() => actions.counter.decrement()}>
                   Decrement
                 </Button>
-                <Button onClick={() => this.actions.counter.reset()}>
+                <Button onClick={() => actions.counter.reset()}>
                   Reset
                 </Button>
               </Flex>
@@ -74,7 +75,7 @@ class HomeView extends Component {
         </Box>
 
         <Box p={2} sm={12} md={6} lg={4}>
-          <User name={this.props.name}/>
+          <User name={this.props.name} />
         </Box>
 
         <Flex align="flex-start" auto>
@@ -98,5 +99,3 @@ class HomeView extends Component {
     )
   }
 }
-
-export default Component.connect(HomeView, require('core/actions'))

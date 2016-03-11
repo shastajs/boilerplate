@@ -5,7 +5,7 @@ import { Flex, Box } from 'reflexbox'
 import DocumentMeta from 'react-document-meta'
 import Title from 'components/Title'
 
-class NotFoundView extends Component {
+export default class NotFoundView extends Component {
   static displayName = 'NotFoundView'
   render() {
     return (
@@ -21,5 +21,3 @@ class NotFoundView extends Component {
     )
   }
 }
-
-export default Component.connect(NotFoundView, require('core/actions'))
