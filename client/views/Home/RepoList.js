@@ -9,13 +9,13 @@ import { PropTypes, connect } from 'shasta'
 import DataComponent from 'shasta-data-view'
 
 @connect({
-  repos: 'subsets.repos'
+  repos: 'api.subsets.repos'
 })
 export default class RepoList extends DataComponent {
   static displayName = 'RepoList'
   static propTypes = {
     name: PropTypes.string.isRequired,
-    repos: PropTypes.iterable
+    repos: PropTypes.list
   }
 
   resolveData() {
@@ -46,7 +46,6 @@ export default class RepoList extends DataComponent {
       }
     </Panel>)
   }
-
   renderErrors(errors) {
     return (<Panel rounded>
       <PanelHeader>Repositories</PanelHeader>

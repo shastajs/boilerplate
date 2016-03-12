@@ -1,14 +1,27 @@
 import User from './model'
-import decl from 'rethink-decl'
 import { screenDeep } from 'palisade'
+import map from 'lodash.map'
+import escape from 'escape-string-regexp'
+import { r } from 'connections/rethink'
 import changeStream from 'rethinkdb-change-stream'
 
+export const http = {
+  method: 'get',
+  instance: false
+}
 export const tailable = true
 export const isAuthorized = ({ user }) =>
   User.authorized('list', user)
 
+// TODO: support nested?
 export const process = ({ options, tail }) => {
-  const query = decl(User, options)
+  const query  = User.filter((u) =>
+    r.or(
+      ...map(options, (v, k) =>
+        u(k).match(escape(v))
+      )
+    )
+  )
   return tail
     ? changeStream(query.changes({ includeInitial: true }))
     : query.run()

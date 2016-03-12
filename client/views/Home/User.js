@@ -8,13 +8,13 @@ import actions from 'core/actions'
 import DataComponent from 'shasta-data-view'
 
 @connect({
-  user: 'subsets.user'
+  user: 'api.subsets.user'
 })
 export default class User extends DataComponent {
   static displayName = 'User'
   static propTypes = {
     name: PropTypes.string.isRequired,
-    user: PropTypes.iterable
+    user: PropTypes.map
   }
 
   resolveData() {

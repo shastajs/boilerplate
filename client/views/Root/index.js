@@ -10,10 +10,6 @@ import AboutView from 'views/About'
 import NotFoundView from 'views/NotFound'
 import './index.sass'
 
-// some global crap
-import fixHash from 'remove-fb-hash'
-fixHash()
-
 export default class RootView extends Component {
   static displayName = 'RootView'
   static propTypes = {

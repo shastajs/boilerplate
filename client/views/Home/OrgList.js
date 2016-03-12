@@ -9,13 +9,13 @@ import {
 import DataComponent from 'shasta-data-view'
 
 @connect({
-  orgs: 'subsets.orgs'
+  orgs: 'api.subsets.orgs'
 })
 export default class OrgList extends DataComponent {
   static displayName = 'OrgList'
   static propTypes = {
     name: PropTypes.string.isRequired,
-    orgs: PropTypes.iterable
+    orgs: PropTypes.list
   }
 
   resolveData() {

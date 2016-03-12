@@ -1,4 +1,3 @@
-
 import DOM from 'react-dom'
 import { history } from 'shasta-router'
 import React from 'react'

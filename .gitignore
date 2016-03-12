@@ -2,6 +2,7 @@ node_modules
 coverage
 rethinkdb_data
 dist
+config/secret.js
 scratch
 .imdone
 

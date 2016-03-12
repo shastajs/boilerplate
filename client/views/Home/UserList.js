@@ -8,17 +8,27 @@ import {
 } from 'rebass'
 
 @connect({
-  users: 'subsets.users'
+  users: 'api.subsets.users'
 })
 export default class UserList extends DataComponent {
   static displayName = 'UserList'
   static propTypes = {
-    users: PropTypes.iterable
+    users: PropTypes.list
   }
 
   resolveData() {
-    actions.api.users.find({ subset: 'users' })
     actions.api.users.find({ subset: 'users', tail: true })
+  }
+
+  handleUserClick(user) {
+    actions.api.users.updateById({
+      params: {
+        id: user.get('id')
+      },
+      body: {
+        count: user.get('count') + 1
+      }
+    })
   }
 
   renderData({ users }) {
@@ -26,14 +36,22 @@ export default class UserList extends DataComponent {
       <PanelHeader>DB Users</PanelHeader>
       {
         users.map(user =>
-          <Media key={user.get('id')} align="center" img={user.get('image')}>
-            <Heading level={3}>{user.get('name')}</Heading>
+          <Media
+            key={user.get('id')}
+            align="center"
+            img={user.get('image')}
+            style={{
+              WebkitUserSelect: 'none',
+              cursor: 'pointer'
+            }}
+            onClick={() => this.handleUserClick(user)}>
+              <Heading level={3}>{user.get('name')}</Heading>
+              <Text>Clicks: {user.get('count')}</Text>
           </Media>
         )
       }
     </Panel>)
   }
-
   renderErrors(errors) {
     return (<Panel rounded>
       <PanelHeader>DB Users</PanelHeader>
