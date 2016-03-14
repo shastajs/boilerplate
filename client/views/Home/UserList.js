@@ -13,7 +13,7 @@ import {
 export default class UserList extends DataComponent {
   static displayName = 'UserList'
   static propTypes = {
-    users: PropTypes.list
+    users: PropTypes.map
   }
 
   resolveData() {
@@ -33,7 +33,7 @@ export default class UserList extends DataComponent {
 
   renderData({ users }) {
     return (<Panel rounded>
-      <PanelHeader>DB Users</PanelHeader>
+      <PanelHeader>Leaderboard</PanelHeader>
       {
         users.map(user =>
           <Media

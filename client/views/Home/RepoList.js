@@ -15,7 +15,7 @@ export default class RepoList extends DataComponent {
   static displayName = 'RepoList'
   static propTypes = {
     name: PropTypes.string.isRequired,
-    repos: PropTypes.list
+    repos: PropTypes.map
   }
 
   resolveData() {

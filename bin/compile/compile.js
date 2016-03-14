@@ -13,7 +13,7 @@ compiler.run(function (err, stats) {
   const jsonStats = stats.toJson()
 
   debug('Compilation completed!')
-  console.log(stats.toString())
+  // console.log(stats.toString())
 
   if (err) {
     debug(chalk.red(err))
@@ -22,6 +22,8 @@ compiler.run(function (err, stats) {
     debug(chalk.red(jsonStats.errors))
     process.exit(1)
   } else if (jsonStats.warnings.length > 0) {
-    debug(chalk.yellow(jsonStats.warnings))
+    // debug(chalk.yellow(jsonStats.warnings))
   }
+
+  debug('All done - everything is good to go.')
 })

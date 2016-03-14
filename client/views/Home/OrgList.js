@@ -15,7 +15,7 @@ export default class OrgList extends DataComponent {
   static displayName = 'OrgList'
   static propTypes = {
     name: PropTypes.string.isRequired,
-    orgs: PropTypes.list
+    orgs: PropTypes.map
   }
 
   resolveData() {
