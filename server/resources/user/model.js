@@ -9,11 +9,10 @@ const User = rethink.createModel('User', {
     'pleb',
     'admin'
   ]).default('pleb'),
-  times: {
-    created: type.date().default(Date.now),
-    lastModified: type.date().default(Date.now),
-    lastLogin: type.date().default(Date.now)
-  },
+
+  created: type.date().default(Date.now),
+  lastModified: type.date().default(Date.now),
+  lastLogin: type.date().default(Date.now),
 
   // auth info
   facebook: {
@@ -34,7 +33,7 @@ const User = rethink.createModel('User', {
 
 palisade(User, {
   document: {
-    read: [ 'public' ],
+    read: [ 'loggedIn' ],
     list: [ 'loggedIn' ],
     create: [ 'admin' ],
     update: [ 'admin', 'self' ],
@@ -42,20 +41,18 @@ palisade(User, {
     delete: [ 'admin' ]
   },
   read: {
-    id: [ 'public' ],
-    role: [ 'admin', 'self' ],
-    times: [ 'admin', 'self' ],
-    facebook: [ 'admin' ],
-    name: [ 'public' ],
-    email: [ 'admin', 'self' ],
+    id: [ 'loggedIn' ],
+    role: [ 'loggedIn' ],
+    name: [ 'loggedIn' ],
     location: [ 'loggedIn' ],
-    count: [ 'loggedIn' ]
+    count: [ 'loggedIn' ],
+    created: [ 'loggedIn' ],
+    lastModified: [ 'admin', 'self' ],
+    lastLogin: [ 'admin', 'self' ],
+    email: [ 'admin', 'self' ]
   },
   write: {
-    id: [ 'admin' ],
     role: [ 'admin' ],
-    times: [ 'admin' ],
-    facebook: [ 'admin' ],
     name: [ 'admin', 'self' ],
     email: [ 'admin', 'self' ],
     location: [ 'admin', 'self' ],
@@ -65,7 +62,7 @@ palisade(User, {
 
 // other junk
 User.pre('save', (next) => {
-  this.times.lastModified = Date.now()
+  this.lastModified = Date.now()
   next()
 })
 

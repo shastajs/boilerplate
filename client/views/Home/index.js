@@ -40,7 +40,7 @@ export default class HomeView extends Component {
             {
               jif(this.props.me.isEmpty()
               , () =>
-                <NavItem href="/auth/facebook/start">
+                <NavItem is={Link} to="/login">
                   Sign In
                 </NavItem>
               , () =>

@@ -12,9 +12,7 @@ const dataToUser = (data) => ({
   id: md5(`${providerName}-${data.id}`),
   name: data.name,
   email: data.email,
-  times: {
-    lastLogin: Date.now()
-  },
+  lastLogin: Date.now(),
   [providerName]: {
     id: data.id,
     accessToken: data.accessToken
