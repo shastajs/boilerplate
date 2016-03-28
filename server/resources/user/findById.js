@@ -1,15 +1,15 @@
-import User from './model'
+import Model from './model'
 import { screenDeep } from 'palisade'
 import changeStream from 'rethinkdb-change-stream'
 
 export const tailable = true
-export const isAuthorized = ({ user, id }) =>
-  User.authorized('read', user, { id })
+export const isAuthorized = ({ model, id }) =>
+  Model.authorized('read', model, { id })
 
 export const process = ({ tail, id }) =>
   tail
-    ? changeStream(User.filter({ id }).changes({ includeInitial: true }))
-    : User.get(id).run()
+    ? changeStream(Model.filter({ id }).changes({ includeInitial: true }))
+    : Model.get(id).run()
 
-export const format = ({ user }, data) =>
-  screenDeep(user, data)
+export const format = ({ model }, data) =>
+  screenDeep(model, data)

@@ -1,4 +1,4 @@
-import User from './model'
+import Model from './model'
 import { screenDeep } from 'palisade'
 import map from 'lodash.map'
 import escape from 'escape-string-regexp'
@@ -10,12 +10,12 @@ export const http = {
   instance: false
 }
 export const tailable = true
-export const isAuthorized = ({ user }) =>
-  User.authorized('list', user)
+export const isAuthorized = ({ model }) =>
+  Model.authorized('list', model)
 
 // TODO: support nested?
 export const process = ({ options, tail }) => {
-  const query  = User.filter((u) =>
+  const query  = Model.filter((u) =>
     r.or(
       ...map(options, (v, k) =>
         u(k).match(escape(v))
@@ -27,5 +27,5 @@ export const process = ({ options, tail }) => {
     : query.run()
 }
 
-export const format = ({ user }, data) =>
-  screenDeep(user, data)
+export const format = ({ model }, data) =>
+  screenDeep(model, data)

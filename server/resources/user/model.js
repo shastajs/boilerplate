@@ -2,7 +2,7 @@ import rethink from 'connections/rethink'
 import palisade from 'palisade'
 const { type } = rethink
 
-const User = rethink.createModel('User', {
+const Model = rethink.createModel('Model', {
   // core fields
   id: type.string(),
   role: type.string().enum([
@@ -31,7 +31,7 @@ const User = rethink.createModel('User', {
   location: type.string()
 })
 
-palisade(User, {
+palisade(Model, {
   document: {
     read: [ 'loggedIn' ],
     list: [ 'loggedIn' ],
@@ -61,9 +61,9 @@ palisade(User, {
 })
 
 // other junk
-User.pre('save', (next) => {
+Model.pre('save', (next) => {
   this.lastModified = Date.now()
   next()
 })
 
-export default User
+export default Model
