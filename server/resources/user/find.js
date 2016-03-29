@@ -4,8 +4,8 @@ import { screenDeep } from 'palisade'
 import changeStream from 'rethinkdb-change-stream'
 
 export const tailable = true
-export const isAuthorized = ({ model }) =>
-  Model.authorized('list', model)
+export const isAuthorized = ({ user }) =>
+  Model.authorized('list', user)
 
 export const process = ({ options, tail }) => {
   const query = decl(Model, options)
@@ -14,5 +14,5 @@ export const process = ({ options, tail }) => {
     : query.run()
 }
 
-export const format = ({ model }, data) =>
-  screenDeep(model, data)
+export const format = ({ user }, data) =>
+  screenDeep(user, data)

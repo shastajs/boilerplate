@@ -10,8 +10,8 @@ export const http = {
   instance: false
 }
 export const tailable = true
-export const isAuthorized = ({ model }) =>
-  Model.authorized('list', model)
+export const isAuthorized = ({ user }) =>
+  Model.authorized('list', user)
 
 // TODO: support nested?
 export const process = ({ options, tail }) => {
@@ -27,5 +27,5 @@ export const process = ({ options, tail }) => {
     : query.run()
 }
 
-export const format = ({ model }, data) =>
-  screenDeep(model, data)
+export const format = ({ user }, data) =>
+  screenDeep(user, data)
