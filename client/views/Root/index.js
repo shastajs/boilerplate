@@ -5,7 +5,7 @@ import { Router } from 'shasta-router'
 import { Flex } from 'reflexbox'
 
 import actions from 'core/actions'
-import './index.sass'
+import 'styles/global'
 
 export default class RootView extends Component {
   static displayName = 'RootView'

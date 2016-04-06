@@ -23,6 +23,10 @@ const User = rethink.createModel('User', {
     id: type.string(),
     accessToken: type.string()
   },
+  local: {
+    id: type.string(),
+    accessToken: type.string()
+  },
 
   // user info
   name: type.string(),

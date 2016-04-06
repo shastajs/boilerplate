@@ -32,7 +32,7 @@ export default class OrgList extends DataComponent {
       <PanelHeader>Organizations</PanelHeader>
       {
         orgs.map(org =>
-          <Media key={org.get('id')} align="center" img={org.get('avatar_url')}>
+          <Media key={org.get('id')} align="center">
             <Heading level={3}>{org.get('login')}</Heading>
             {
               jif(org.has('description'), () =>

@@ -11,3 +11,11 @@ export const post = (req, res) => {
   }
   res.redirect('/')
 }
+
+export const postBody = (req, res) => {
+  res.json({
+    redirect: req.session && req.session.redirectTo
+      ? `/${req.session.redirectTo}`
+      : '/'
+  })
+}

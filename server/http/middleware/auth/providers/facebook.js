@@ -3,7 +3,7 @@ import passport from 'passport'
 import { Strategy } from 'passport-facebook'
 import config from 'app-config-chain'
 
-import findOrCreateUser from '../findOrCreateUser'
+import findOrCreateUser from '../findOrCreateOAuth'
 import md5 from '../md5'
 import * as redirect from '../redirect'
 

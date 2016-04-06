@@ -50,6 +50,7 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0",
     "pmx": "^0.6.0",
     "redis": "^2.4.2",
     "require-dir": "^0.3.0",
@@ -61,7 +62,10 @@
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
+    "babel-plugin-csjs-postcss": "^0.2.0",
     "classnames": "^2.2.1",
+    "csjs": "^1.0.1",
+    "csjs-inject": "^1.0.0",
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
     "eslint": "^2.2.0",
@@ -77,13 +81,13 @@
     "isparta-loader": "^2.0.0",
     "jif": "^1.0.1",
     "json-loader": "^0.5.4",
-    "node-sass": "^3.3.3",
     "nodemon": "^1.9.1",
     "normalizr": "^2.0.0",
     "postcss-loader": "^0.8.0",
     "react": "^0.14.7",
     "react-document-meta": "^2.0.2",
     "react-dom": "^0.14.0",
+    "react-link-state": "^0.1.2",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "rebass": "^0.2.0",
@@ -93,10 +97,8 @@
     "reflexbox": "^1.0.0",
     "remove-fb-hash": "^1.0.0",
     "rucksack-css": "^0.8.5",
-    "sass-loader": "^3.0.0",
     "shasta": "shastajs/shasta",
     "shasta-data-view": "shastajs/shasta-data-view",
-    "shasta-forms": "shastajs/shasta-forms",
     "shasta-logger": "^2.0.0",
     "shasta-router": "shastajs/shasta-router",
     "style-loader": "^0.13.0",
@@ -116,7 +118,20 @@
     "plugins": [
       "transform-runtime",
       "transform-decorators-legacy",
-      "add-module-exports"
+      "add-module-exports",
+      [
+        "csjs-postcss",
+        {
+          "plugins": [
+            [
+              "rucksack-css",
+              {
+                "autoprefixer": true
+              }
+            ]
+          ]
+        }
+      ]
     ]
   },
   "eslintConfig": {
