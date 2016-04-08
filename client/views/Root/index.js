@@ -7,6 +7,7 @@ import { Flex } from 'reflexbox'
 import actions from 'core/actions'
 import 'styles/global'
 import rebassStyles from 'styles/rebass'
+import reflexboxStyles from 'styles/reflexbox'
 
 export default class RootView extends Component {
   static displayName = 'RootView'
@@ -16,11 +17,13 @@ export default class RootView extends Component {
     routes: PropTypes.node.isRequired
   }
   static childContextTypes = {
-    rebass: PropTypes.object
+    rebass: PropTypes.object,
+    reflexbox: React.PropTypes.object
   }
   getChildContext() {
     return {
-      rebass: rebassStyles
+      rebass: rebassStyles,
+      reflexbox: reflexboxStyles
     }
   }
 
