@@ -55,9 +55,7 @@ const strategy = new Strategy(findOrCreateUser)
 passport.use(strategy)
 
 // init the router
-const start = passport.authenticate(providerName, {
-  failureRedirect: '/login'
-})
+const start = passport.authenticate(providerName)
 const router = Router({ mergeParams: true })
 router.post(`/auth/${providerName}/start`, redirect.pre, start, redirect.postBody)
 

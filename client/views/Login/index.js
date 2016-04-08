@@ -1,9 +1,10 @@
 import React from 'react'
 import { Flex, Box } from 'reflexbox'
-import { Button, Input, Space } from 'rebass'
+import { Button, Input, Space, Text } from 'rebass'
 import { Link } from 'shasta-router'
-import { Component, connect } from 'shasta'
+import { Component, PropTypes, connect } from 'shasta'
 import DocumentMeta from 'react-document-meta'
+import jif from 'jif'
 import Title from 'components/Title'
 import actions from 'core/actions'
 
@@ -12,6 +13,9 @@ import actions from 'core/actions'
 })
 export default class LoginView extends Component {
   static displayName = 'LoginView'
+  static propTypes = {
+    loginRedirect: PropTypes.map
+  }
   static defaultState = {
     email: '',
     password: ''
@@ -27,10 +31,15 @@ export default class LoginView extends Component {
       body: {
         username: this.state.email,
         password: this.state.password
+      },
+      onResponse: ({ body: { redirectTo, me } }) => {
+        actions.me.set(me)
+        actions.router.replace(redirectTo)
       }
     })
   }
   render() {
+    const { loginRedirect } = this.props
     return (
       <Flex align="center" justify="center" column auto>
         <DocumentMeta title="Login"/>
@@ -47,7 +56,7 @@ export default class LoginView extends Component {
               onChange={(e) =>
                 this.setState({ email: e.target.value })
               }
-              value={this.state.email}
+              defaultValue={this.state.email}
               required />
             <Input
               label="Password"
@@ -56,8 +65,15 @@ export default class LoginView extends Component {
               onChange={(e) =>
                 this.setState({ password: e.target.value })
               }
-              value={this.state.password}
+              defaultValue={this.state.password}
               required />
+            {
+              jif(loginRedirect && loginRedirect.has('error'), () =>
+                <Text color="red">
+                  Invalid username or password!
+                </Text>
+              )
+            }
             <Button theme="info" onClick={this.handleLogin}>
               Login
             </Button>

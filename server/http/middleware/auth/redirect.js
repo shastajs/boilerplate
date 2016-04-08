@@ -15,5 +15,8 @@ export const post = (req, res) => {
 }
 
 export const postBody = (req, res) => {
-  res.json({ redirectTo: getRedirect(req) })
+  res.json({
+    redirectTo: getRedirect(req),
+    me: req.user ? req.user.screen('read', req.user) : null
+  })
 }
