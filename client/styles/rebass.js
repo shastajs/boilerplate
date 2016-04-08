@@ -2,7 +2,15 @@ import colors from 'styles/colors'
 
 export default {
   colors: colors,
-  fontSizes: [ 64, 48, 24, 18, 16, 14, 12 ],
+  fontSizes: [
+    48,
+    32,
+    24,
+    20,
+    16,
+    14,
+    12
+  ],
   Button: {
     outline: 0
   }
