@@ -56,7 +56,7 @@ export default class LoginView extends Component {
               onChange={(e) =>
                 this.setState({ email: e.target.value })
               }
-              defaultValue={this.state.email}
+              value={this.state.email}
               required />
             <Input
               label="Password"
@@ -65,7 +65,7 @@ export default class LoginView extends Component {
               onChange={(e) =>
                 this.setState({ password: e.target.value })
               }
-              defaultValue={this.state.password}
+              value={this.state.password}
               required />
             <Button theme="info" onClick={this.handleLogin}>
               Login
