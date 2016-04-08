@@ -2,22 +2,28 @@ import React from 'react'
 import { Flex, Box } from 'reflexbox'
 import { Button, Input, Space } from 'rebass'
 import { Link } from 'shasta-router'
-import { Component } from 'shasta'
-import linkState from 'react-link-state'
+import { Component, connect } from 'shasta'
 import DocumentMeta from 'react-document-meta'
 import Title from 'components/Title'
 import actions from 'core/actions'
 
-class LoginView extends Component {
+@connect({
+  loginRedirect: 'api.subsets.loginRedirect'
+})
+export default class LoginView extends Component {
   static displayName = 'LoginView'
   static defaultState = {
-    email: null,
-    password: null
+    email: '',
+    password: ''
   }
   handleLogin() {
     if (!this.state.email) return
     if (!this.state.password) return
     actions.login({
+      subset: 'loginRedirect',
+      query: {
+        redirectTo: null // TODO
+      },
       body: {
         username: this.state.email,
         password: this.state.password
@@ -38,13 +44,19 @@ class LoginView extends Component {
               name="email"
               placeholder="example@city.gov"
               type="email"
-              valueLink={linkState(this, 'email')}
+              onChange={(e) =>
+                this.setState({ email: e.target.value })
+              }
+              value={this.state.email}
               required />
             <Input
               label="Password"
               name="password"
               type="password"
-              valueLink={linkState(this, 'password')}
+              onChange={(e) =>
+                this.setState({ password: e.target.value })
+              }
+              value={this.state.password}
               required />
             <Button theme="info" onClick={this.handleLogin}>
               Login
@@ -74,5 +86,3 @@ class LoginView extends Component {
     )
   }
 }
-
-export default LoginView

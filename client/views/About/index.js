@@ -5,7 +5,7 @@ import { Component } from 'shasta'
 import DocumentMeta from 'react-document-meta'
 import Title from 'components/Title'
 
-class AboutView extends Component {
+export default class AboutView extends Component {
   static displayName = 'AboutView'
   render() {
     return (
@@ -21,5 +21,3 @@ class AboutView extends Component {
     )
   }
 }
-
-export default AboutView

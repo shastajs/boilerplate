@@ -43,7 +43,6 @@ const findOrCreateUser = (username, password, cb) => {
   const maybeUser = new User(dataToUser(username, password))
   getUserById(maybeUser.id, (err, existing) => {
     if (err) return cb(err)
-    console.log('existing', existing)
     if (existing && !isPasswordEqual(maybeUser, existing)) {
       return cb(null, false)
     }
