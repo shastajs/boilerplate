@@ -67,6 +67,9 @@ export default class LoginView extends Component {
               }
               defaultValue={this.state.password}
               required />
+            <Button theme="info" onClick={this.handleLogin}>
+              Login
+            </Button>
             {
               jif(loginRedirect && loginRedirect.has('error'), () =>
                 <Text color="red">
@@ -74,9 +77,6 @@ export default class LoginView extends Component {
                 </Text>
               )
             }
-            <Button theme="info" onClick={this.handleLogin}>
-              Login
-            </Button>
           </Flex>
         </Box>
         <Box p={1}>
