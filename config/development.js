@@ -17,6 +17,10 @@ export default {
   },
 
   // auth stuff
+  github: {
+    id: '8857f73904d006ead64c',
+    secret: '534f19a91a67c90119a6769dc7610d87302ca943'
+  },
   facebook: {
     id: '946814205398323',
     secret: '568fa31830811386f09b195091cbb699',

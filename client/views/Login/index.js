@@ -94,6 +94,12 @@ export default class LoginView extends Component {
             href="/auth/google/start">
             Google
           </Button>
+          <Space />
+          <Button
+            theme="info"
+            href="/auth/github/start">
+            Github
+          </Button>
         </Box>
         <Box p={1}>
           <Link to="/">Back To Home</Link>
