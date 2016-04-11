@@ -1,12 +1,12 @@
-import User from './model'
+import Model from './model'
 import { screenDeep } from 'palisade'
 
 export const isAuthorized = ({ user, id }) =>
-  User.authorized('replace', user, { id })
+  Model.authorized('replace', user, { id })
 
 export const process = ({ id, user, data }) => {
-  const change = User.screen('write', user, data)
-  User.get(id).replace(new User(change), { returnChanges: true }).run()
+  const change = Model.screen('write', user, data)
+  Model.get(id).replace(new Model(change), { returnChanges: true }).run()
 }
 
 export const format = ({ user }, data) =>
