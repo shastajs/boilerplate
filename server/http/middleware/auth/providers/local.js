@@ -44,7 +44,7 @@ const findOrCreateUser = (username, password, cb) => {
   getUserById(maybeUser.id, (err, existing) => {
     if (err) return cb(err)
     if (existing && !isPasswordEqual(maybeUser, existing)) {
-      return cb(null, false)
+      return cb(null, false, { message: 'Invalid username or password' })
     }
     createOrUpdateUser(maybeUser, cb)
   })

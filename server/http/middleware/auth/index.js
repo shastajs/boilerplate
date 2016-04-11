@@ -15,7 +15,7 @@ const getUserById = (id, cb) => {
     if (err && err.name !== 'DocumentNotFoundError') {
       return cb(err)
     }
-    cb(null, existing)
+    cb(null, existing || false)
   })
 }
 
