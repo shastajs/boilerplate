@@ -8,20 +8,17 @@ import md5 from '../md5'
 import * as redirect from '../redirect'
 
 const providerName = 'github'
-const dataToUser = (data) => {
-  console.log(data)
-  return ({
-    id: md5(`${providerName}-${data.id}`),
-    name: data.name,
-    email: data.email,
-    lastLogin: Date.now(),
+const dataToUser = (data) => ({
+  id: md5(`${providerName}-${data.id}`),
+  name: data.name,
+  email: data.email,
+  lastLogin: Date.now(),
 
-    [providerName]: {
-      id: String(data.id),
-      accessToken: data.accessToken
-    }
-  })
-}
+  [providerName]: {
+    id: String(data.id),
+    accessToken: data.accessToken
+  }
+})
 
 // init the passport junk
 const strategyConfig = {
