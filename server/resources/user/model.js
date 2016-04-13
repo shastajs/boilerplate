@@ -23,12 +23,24 @@ const Model = rethink.createModel('Model', {
     id: type.string(),
     accessToken: type.string()
   },
+  github: {
+    id: type.string(),
+    accessToken: type.string()
+  },
+  local: {
+    id: type.string(),
+    accessToken: type.string()
+  },
 
   // user info
   name: type.string(),
   email: type.string().email(),
   count: type.number().default(0),
   location: type.string()
+})
+
+Model.ready().then(() => {
+  // import and set up relationships here
 })
 
 palisade(Model, {

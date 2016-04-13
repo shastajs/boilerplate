@@ -5,7 +5,9 @@ import { Router } from 'shasta-router'
 import { Flex } from 'reflexbox'
 
 import actions from 'core/actions'
-import './index.sass'
+import 'styles/global'
+import rebassStyles from 'styles/rebass'
+import reflexboxStyles from 'styles/reflexbox'
 
 export default class RootView extends Component {
   static displayName = 'RootView'
@@ -13,6 +15,16 @@ export default class RootView extends Component {
     history: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     routes: PropTypes.node.isRequired
+  }
+  static childContextTypes = {
+    rebass: PropTypes.object,
+    reflexbox: React.PropTypes.object
+  }
+  getChildContext() {
+    return {
+      rebass: rebassStyles,
+      reflexbox: reflexboxStyles
+    }
   }
 
   componentDidMount() {

@@ -52,7 +52,7 @@ export default class HomeView extends Component {
           </Toolbar>
         </Box>
 
-        <Box p={2} sm={12} md={6} lg={4}>
+        <Box p={2} mobile={12} tablet={6} desktop={4}>
           <Panel rounded>
             <PanelHeader>Counter</PanelHeader>
             <Container>
@@ -74,20 +74,20 @@ export default class HomeView extends Component {
           </Panel>
         </Box>
 
-        <Box p={2} sm={12} md={6} lg={4}>
+        <Box p={2} mobile={12} tablet={6} desktop={4}>
           <User name={this.props.name} />
         </Box>
 
         <Flex align="flex-start" auto>
-          <Box p={2} sm={12} md={4} lg={4}>
+          <Box p={2} mobile={12} tablet={4} desktop={4}>
             <OrgList name={this.props.name}/>
           </Box>
 
-          <Box p={2} sm={12} md={4} lg={4}>
+          <Box p={2} mobile={12} tablet={4} desktop={4}>
             <RepoList name={this.props.name}/>
           </Box>
 
-          <Box p={2} sm={12} md={4} lg={4}>
+          <Box p={2} mobile={12} tablet={4} desktop={4}>
             <UserList/>
           </Box>
         </Flex>

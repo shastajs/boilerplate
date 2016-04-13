@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { Strategy } from 'passport-google-oauth20'
+import { Strategy } from 'passport-github'
 import config from 'app-config-chain'
 
 import findOrCreateUser from '../findOrCreateOAuth'
 import md5 from '../md5'
 import * as redirect from '../redirect'
 
-const providerName = 'google'
+const providerName = 'github'
 const dataToUser = (data) => ({
   id: md5(`${providerName}-${data.id}`),
   name: data.name,
@@ -15,7 +15,7 @@ const dataToUser = (data) => ({
   lastLogin: Date.now(),
 
   [providerName]: {
-    id: data.id,
+    id: String(data.id),
     accessToken: data.accessToken
   }
 })
@@ -30,13 +30,11 @@ const strategy = new Strategy(strategyConfig, findOrCreateUser(dataToUser))
 passport.use(strategy)
 
 // init the router
-const start = passport.authenticate(providerName, {
-  scope: config[providerName].scope
-})
-
+const start = passport.authenticate(providerName)
 const callback = passport.authenticate(providerName, {
   failureRedirect: '/login'
 })
+
 const router = Router({ mergeParams: true })
 router.get(`/auth/${providerName}/start`, redirect.pre, start)
 router.get(`/auth/${providerName}/callback`, callback, redirect.post)

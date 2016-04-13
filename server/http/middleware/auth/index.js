@@ -7,18 +7,22 @@ import requireDir from 'require-dir'
 import values from 'lodash.values'
 
 const providers = values(requireDir(path.join(__dirname, './providers')))
-const userToString = (user, cb) =>
+const userToId = (user, cb) =>
   cb(null, user.id)
 
-const stringToUser = (id, cb) =>
-  User.get(id).run((_, res) =>
-    cb(null, res || false)
-  )
+const getUserById = (id, cb) => {
+  User.get(id).run((err, existing) => {
+    if (err && err.name !== 'DocumentNotFoundError') {
+      return cb(err)
+    }
+    cb(null, existing || false)
+  })
+}
 
 const router = Router({ mergeParams: true })
 
-passport.serializeUser(userToString)
-passport.deserializeUser(stringToUser)
+passport.serializeUser(userToId)
+passport.deserializeUser(getUserById)
 
 router.get('/auth/logout', (req, res) => {
   req.logout()

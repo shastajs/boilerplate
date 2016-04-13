@@ -1,6 +1,4 @@
 import webpack from 'webpack'
-import cssnano from 'cssnano'
-import rucksack from 'rucksack-css'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from 'app-config-chain'
@@ -58,10 +56,6 @@ const webpackConfig = {
         collapseWhitespace: true
       }
     }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    }),
     new ExtractTextPlugin('[name].[contenthash].css', {
       allChunks: true
     })
@@ -81,25 +75,6 @@ const webpackConfig = {
     ],
     loaders: loaders
   },
-  sassLoader: {
-    includePaths: path.join(config.paths.client, 'styles')
-  },
-  postcss: [
-    rucksack({
-      autoprefixer: true
-    }),
-    cssnano({
-      sourcemap: globals.__DEV__,
-      autoprefixer: {
-        add: true,
-        remove: true,
-        browsers: [ 'last 2 versions' ]
-      },
-      discardComments: {
-        removeAll: true
-      }
-    })
-  ],
   eslint: {}
 }
 

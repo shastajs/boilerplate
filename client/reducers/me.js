@@ -1,5 +1,5 @@
-import { Map } from 'immutable'
+import { Map, fromJS } from 'immutable'
 
 export const initialState = Map()
 
-export const update = (state, { payload }) => state.merge(payload)
+export const set = (state, { payload }) => fromJS(payload)

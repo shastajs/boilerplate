@@ -21,6 +21,7 @@ const config = {
     port: process.env.PORT || 3000
   },
 
+  salt: 'password-secret-salt-1337',
   cookie: {
     name: 'x',
     secret: 'stack-cookie-secret-1337'

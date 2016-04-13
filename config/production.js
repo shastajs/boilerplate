@@ -25,9 +25,13 @@ const config = {
   },
 
   // auth stuff
+  github: {
+    id: 'get-your-own',
+    secret: 'get-your-own'
+  },
   facebook: {
-    id: '946814122064998',
-    secret: 'eb7e35157c197272800fe946ee05dc84',
+    id: 'get-your-own',
+    secret: 'get-your-own',
     scope: [
       'email',
       'public_profile',
