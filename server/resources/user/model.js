@@ -2,7 +2,7 @@ import rethink from 'connections/rethink'
 import palisade from 'palisade'
 const { type } = rethink
 
-const Model = rethink.createModel('Model', {
+const Model = rethink.createModel('User', {
   // core fields
   id: type.string(),
   role: type.string().enum([
