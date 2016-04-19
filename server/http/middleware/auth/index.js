@@ -10,6 +10,12 @@ const providers = values(requireDir(path.join(__dirname, './providers')))
 const userToId = (user, cb) =>
   cb(null, user.id)
 
+const read = (o, user) => {
+  if (!o) return null
+  if (o.screen) return o.screen('read', user)
+  return o
+}
+
 const getUserById = (id, cb) => {
   User.get(id).run((err, existing) => {
     if (err && err.name !== 'DocumentNotFoundError') {
@@ -31,7 +37,7 @@ router.get('/auth/logout', (req, res) => {
 
 router.get('/initialState.js', (req, res) => {
   const initialState = {
-    me: req.user ? req.user.screen('read', req.user) : null
+    me: read(req.user, req.user)
   }
   res.status(200)
   res.type('text/javascript')
