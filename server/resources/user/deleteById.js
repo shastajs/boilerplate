@@ -5,7 +5,7 @@ export const isAuthorized = ({ id, user }) =>
   Model.authorized('delete', user, { id })
 
 export const process = ({ id }) =>
-  Model.purge(id).run()
+  Model.get(id).run().then((i) => i.purge())
 
 export const format = ({ user }, data) =>
   screenDeep(user, data)
