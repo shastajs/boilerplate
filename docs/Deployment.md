@@ -17,6 +17,8 @@ aws configure
 export KUBERNETES_PROVIDER=aws
 
 # weird docker stuff you have to do
+docker pull node:latest
+docker pull rethinkdb:latest
 docker-machine create --driver virtualbox default
 eval "$(docker-machine env default)"
 docker build -t <your username>/<your app name> .
@@ -26,6 +28,4 @@ docker build -t <your username>/<your app name> .
 
 ```
 docker run -d -p 9080:80 <your username>/<your app name>
-
-open 'http://localhost:9080'
 ```
