@@ -7,9 +7,9 @@
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "nodemon",
-    "start:prod": "NODE_ENV=production PORT=$PORT node bin/server",
+    "start:prod": "DEBUG=app:* NODE_ENV=production PORT=$PORT node bin/server",
     "compile": "DEBUG=app:* NODE_ENV=production BUILD=TRUE node bin/compile",
-    "deploy": "rm -rf dist && npm run compile && git add dist -A && git commit -m 'deploy' && git push heroku master"
+    "deploy": "rm -rf dist && npm run compile && git add dist -A && git commit -m 'deploy' && git push origin production"
   },
   "repository": {
     "type": "git",
