@@ -73,7 +73,7 @@ palisade(Model, {
 })
 
 // other junk
-Model.pre('save', (next) => {
+Model.pre('save', function (next) {
   this.lastModified = Date.now()
   next()
 })
