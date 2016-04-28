@@ -2,9 +2,8 @@
 import React from 'react'
 import { Provider, Component, PropTypes } from 'shasta'
 import { Router } from 'shasta-router'
-import { Flex } from 'reflexbox'
 
-import actions from 'core/actions'
+// styling globals
 import 'styles/global'
 import rebassStyles from 'styles/rebass'
 import reflexboxStyles from 'styles/reflexbox'
@@ -27,19 +26,19 @@ export default class RootView extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log('Actions:', actions)
+  componentWillMount() {
+    console.time('First Render Time')
   }
-
+  componentDidMount() {
+    console.timeEnd('First Render Time')
+  }
   render() {
     const { store, history, routes } = this.props
     return (
       <Provider store={store}>
-        <Flex auto>
-          <Router history={history}>
-            {routes}
-          </Router>
-        </Flex>
+        <Router history={history}>
+          {routes}
+        </Router>
       </Provider>
     )
   }

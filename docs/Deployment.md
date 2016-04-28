@@ -13,15 +13,21 @@ brew install awscli
 # set up your aws credentials
 aws configure
 
-# set your kubernetes shit to aws
-export KUBERNETES_PROVIDER=aws
-
 # weird docker stuff you have to do
 docker pull node:latest
 docker pull rethinkdb:latest
 docker-machine create --driver virtualbox default
 eval "$(docker-machine env default)"
 docker build -t <your username>/<your app name> .
+
+# configure kubernetes
+export KUBERNETES_PROVIDER=aws
+export KUBE_AWS_ZONE=eu-west-1c
+export NUM_NODES=2
+export AWS_S3_REGION=eu-west-1
+export AWS_S3_BUCKET=yourappname-kubernetes-artifacts
+export INSTANCE_PREFIX=k8s
+curl -sS https://get.k8s.io | bash
 ```
 
 ## Local Testing
