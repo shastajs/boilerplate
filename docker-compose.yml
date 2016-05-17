@@ -1,0 +1,29 @@
+web:
+  build: .
+  command: node /usr/src/app/bin/server
+  environment:
+    - DEBUG=app:*
+    - NODE_ENV=production
+    - PORT=3000
+    - REDIS_URL
+    - RETHINKDB_HOST
+    - RETHINKDB_PORT
+  ports:
+    - 80:3000
+  links:
+    - redis
+    - rethinkdb
+  volumes:
+    - .:/usr/src/app
+
+redis:
+  image: convox/redis
+  ports:
+    - 6379
+
+rethinkdb:
+  image: rethinkdb
+  ports:
+    - 28015
+    - 8080
+    - 29015
