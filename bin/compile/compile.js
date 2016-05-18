@@ -26,4 +26,5 @@ compiler.run(function (err, stats) {
   }
 
   debug('All done - everything is good to go.')
+  process.exit(0)
 })
