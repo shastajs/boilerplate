@@ -39,6 +39,8 @@ const Model = rethink.createModel('User', {
   location: type.string()
 })
 
+Model.ensureIndex('created')
+
 Model.ready().then(() => {
   // import and set up relationships here
 })
