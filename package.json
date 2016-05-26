@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
+    "repl": "DEBUG=app:* NODE_ENV=$NODE_ENV node bin/repl",
     "start": "nodemon",
-    "start:prod": "DEBUG=app:* NODE_ENV=production PORT=$PORT node bin/server",
     "compile": "DEBUG=app:* NODE_ENV=production BUILD=TRUE node bin/compile",
     "deploy": "rm -rf dist && npm run compile && convox deploy"
   },
